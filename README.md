@@ -1,0 +1,2 @@
+# AppiumInstagramManager
+Instagram manager application
