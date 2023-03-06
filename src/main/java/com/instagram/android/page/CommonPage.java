@@ -18,8 +18,8 @@ public class CommonPage {
         cap.setCapability("udid", "HQ66GBS27849");
         cap.setCapability("platformName", "Android");
         cap.setCapability("platformVersion", "5.1");
-        cap.setCapability("appPackage", "com.android.calculator2");
-        cap.setCapability("appActivity", "com.android.calculator2.Calculator");
+        cap.setCapability("appPackage", "com.instagram.android");
+        cap.setCapability("appActivity", "com.instagram.mainactivity.MainActivity");
         cap.setCapability("noReset", "true");
     }
 
