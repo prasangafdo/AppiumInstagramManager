@@ -2,17 +2,21 @@ package com.instagram.android.page;
 
 import io.appium.java_client.AppiumDriver;
 import org.openqa.selenium.remote.DesiredCapabilities;
-
 import java.net.MalformedURLException;
 import java.net.URL;
 
+
 public class CommonPage {
     public static DesiredCapabilities cap = new DesiredCapabilities();
-    private final URL url;
+    private URL url = null;
     public static AppiumDriver driver;
 
-    public CommonPage() throws MalformedURLException {
-        url = new URL("http://0.0.0.0:4723/wd/hub");
+    public CommonPage()  {
+        try {
+            url = new URL("http://0.0.0.0:4723/wd/hub");
+        } catch (MalformedURLException e) {
+            e.printStackTrace();
+        }
 
         cap.setCapability("deviceName", "HTC Desire 626 Dual Sim");
         cap.setCapability("udid", "HQ66GBS27849");
