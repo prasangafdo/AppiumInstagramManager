@@ -16,6 +16,9 @@ public class ProfileManagementModule {
     public static boolean isLeastInteractedLabelDisplaying(){
         return profile.isLeastInteractedLabelDisplaying();
     }
+    public static void scrollTillLoadMoreButtonDisplays(){
+        profile.scrollTillLoadMoreButtonDisplays();
+    }
 
 
 }
