@@ -87,18 +87,45 @@ public class ProfilePage extends CommonPage{
 //        driver.perform(Arrays.asList(dragNDrop));
 
 
-        Point source = driver.findElement(lblLeastInteracted).getLocation();
-        PointerInput finger = new PointerInput(PointerInput.Kind.TOUCH, "finger");
-        Sequence sequence = new Sequence(finger, 1);
-        sequence.addAction(finger.createPointerMove(ofMillis(0),
-                PointerInput.Origin.viewport(), source.x, source.y));
-        sequence.addAction(finger.createPointerDown(PointerInput.MouseButton.MIDDLE.asArg()));
-        sequence.addAction(new Pause(finger, ofMillis(600)));
-        sequence.addAction(finger.createPointerMove(ofMillis(600),
-                PointerInput.Origin.viewport(), source.x, source.y -  99500));
-        sequence.addAction(finger.createPointerUp(PointerInput.MouseButton.MIDDLE.asArg()));
+//        try {
+//            driver.findElement(btnLoadMore).isDisplayed();
+//        }
+//        catch (Exception e){
+//            e.printStackTrace();
 
-        driver.perform(singletonList(sequence));
+        wait.until(ExpectedConditions.elementToBeClickable(lblLeastInteracted));
+
+        while (driver.findElements(btnLoadMore).isEmpty()){
+
+
+            Point source = driver.findElement(lblLeastInteracted).getLocation();
+            PointerInput finger = new PointerInput(PointerInput.Kind.TOUCH, "finger");
+            Sequence sequence = new Sequence(finger, 1);
+            sequence.addAction(finger.createPointerMove(ofMillis(0),
+                    PointerInput.Origin.viewport(), source.x, source.y));
+            sequence.addAction(finger.createPointerDown(PointerInput.MouseButton.MIDDLE.asArg()));
+            sequence.addAction(new Pause(finger, ofMillis(600)));
+            sequence.addAction(finger.createPointerMove(ofMillis(600),
+                    PointerInput.Origin.viewport(), source.x, source.y -  99000));
+            sequence.addAction(finger.createPointerUp(PointerInput.MouseButton.MIDDLE.asArg()));
+
+            driver.perform(singletonList(sequence));
+
+            wait.until(ExpectedConditions.visibilityOfElementLocated(btnLoadMore));
+            try {
+                wait.until(ExpectedConditions.elementToBeClickable(btnLoadMore)).click();
+
+            }
+            catch (Exception e){
+                e.printStackTrace();
+            }
+
+//            driver.findElement(btnLoadMore).click();
+        }
+
+
+
+
 
 
     }
