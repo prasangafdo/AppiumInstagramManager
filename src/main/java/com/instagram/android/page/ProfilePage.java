@@ -7,6 +7,7 @@ import org.openqa.selenium.By;
 import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.Point;
 import org.openqa.selenium.WebElement;
+import org.openqa.selenium.interactions.Pause;
 import org.openqa.selenium.interactions.PointerInput;
 import org.openqa.selenium.interactions.Sequence;
 import org.openqa.selenium.support.ui.ExpectedConditions;
@@ -16,6 +17,9 @@ import java.time.Duration;
 import java.util.Arrays;
 import java.util.Collections;
 import java.util.HashMap;
+
+import static java.time.Duration.ofMillis;
+import static java.util.Collections.singletonList;
 
 public class ProfilePage extends CommonPage{
 
@@ -67,20 +71,36 @@ public class ProfilePage extends CommonPage{
 //        js.executeScript("mobile: swipe", scrollObject);
 
 
-        int X = driver.findElement(btnSeeAllSuggestions).getRect().x + (driver.findElement(btnSeeAllSuggestions).getSize().width / 2);
-        int StartY = driver.findElement(btnSeeAllSuggestions).getRect().y + (driver.findElement(btnSeeAllSuggestions).getSize().height / 4);
-        int EndY = driver.findElement(btnSeeAllSuggestions).getRect().y + (driver.findElement(btnSeeAllSuggestions).getSize().height * 3 / 4);
+//        int X = driver.findElement(lblLeastInteracted).getRect().x + (driver.findElement(lblLeastInteracted).getSize().width / 2);
+//        int StartY = driver.findElement(lblLeastInteracted).getRect().y + (driver.findElement(lblLeastInteracted).getSize().height / 4);
+//        int EndY = driver.findElement(lblLeastInteracted).getRect().y + (driver.findElement(lblLeastInteracted).getSize().height * 3 / 4);
+//
+//
+//        PointerInput finger = new PointerInput(PointerInput.Kind.TOUCH, "finger");
+//        Sequence dragNDrop = new Sequence(finger, 1);
+//        dragNDrop.addAction(finger.createPointerMove(Duration.ofSeconds(0),
+//                PointerInput.Origin.viewport(), X, StartY));
+//        dragNDrop.addAction(finger.createPointerDown(PointerInput.MouseButton.LEFT.asArg()));
+//        dragNDrop.addAction(finger.createPointerMove(Duration.ofMillis(700),
+//                PointerInput.Origin.viewport(), X, EndY));
+//        dragNDrop.addAction(finger.createPointerUp(PointerInput.MouseButton.LEFT.asArg()));
+//        driver.perform(Arrays.asList(dragNDrop));
 
 
+        Point source = driver.findElement(lblLeastInteracted).getLocation();
         PointerInput finger = new PointerInput(PointerInput.Kind.TOUCH, "finger");
-        Sequence dragNDrop = new Sequence(finger, 1);
-        dragNDrop.addAction(finger.createPointerMove(Duration.ofSeconds(0),
-                PointerInput.Origin.viewport(), X, StartY));
-        dragNDrop.addAction(finger.createPointerDown(PointerInput.MouseButton.LEFT.asArg()));
-        dragNDrop.addAction(finger.createPointerMove(Duration.ofMillis(700),
-                PointerInput.Origin.viewport(), X, EndY));
-        dragNDrop.addAction(finger.createPointerUp(PointerInput.MouseButton.LEFT.asArg()));
-        driver.perform(Arrays.asList(dragNDrop));
+        Sequence sequence = new Sequence(finger, 1);
+        sequence.addAction(finger.createPointerMove(ofMillis(0),
+                PointerInput.Origin.viewport(), source.x, source.y));
+        sequence.addAction(finger.createPointerDown(PointerInput.MouseButton.MIDDLE.asArg()));
+        sequence.addAction(new Pause(finger, ofMillis(600)));
+        sequence.addAction(finger.createPointerMove(ofMillis(600),
+                PointerInput.Origin.viewport(), source.x, source.y -  99500));
+        sequence.addAction(finger.createPointerUp(PointerInput.MouseButton.MIDDLE.asArg()));
+
+        driver.perform(singletonList(sequence));
+
+
     }
     /*
     *   Do the scrolling while checking
