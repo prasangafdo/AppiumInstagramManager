@@ -7,7 +7,7 @@ import org.testng.asserts.SoftAssert;
 public class TestRunner {
 
     @Test
-    public void navigateToFollowingList() {
+    public void navigateToFollowingList() throws InterruptedException {
         SoftAssert softAssert = new SoftAssert();
         CommonPage commonPage = new CommonPage(); //Will update this later
         commonPage.setupDriver();

@@ -16,7 +16,7 @@ public class ProfileManagementModule {
     public static boolean isLeastInteractedLabelDisplaying(){
         return profile.isLeastInteractedLabelDisplaying();
     }
-    public static void scrollTillLoadMoreButtonDisplays(){
+    public static void scrollTillLoadMoreButtonDisplays() throws InterruptedException {
         profile.scrollTillLoadMoreButtonDisplays();
     }
 
