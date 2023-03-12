@@ -133,20 +133,20 @@ public class ProfilePage extends CommonPage{
         sequence.addAction(finger.createPointerDown(PointerInput.MouseButton.MIDDLE.asArg()));
         sequence.addAction(new Pause(finger, ofMillis(600)));
         sequence.addAction(finger.createPointerMove(ofMillis(600),
-                PointerInput.Origin.viewport(), source.x, source.y -  50000));
+                PointerInput.Origin.viewport(), source.x, source.y -  900));
         sequence.addAction(finger.createPointerUp(PointerInput.MouseButton.MIDDLE.asArg()));
 
         driver.perform(singletonList(sequence));
         this.setUserList();
-        for (String element: set){
-            System.out.println("Web elements list ===>"+element);
-        }
-        wait.until(ExpectedConditions.elementToBeClickable(btnLoadMore)).click();
+//        for (String element: set){
+//            System.out.println("Web elements list ===>"+element);
+//        }
+//        wait.until(ExpectedConditions.elementToBeClickable(btnLoadMore)).click(); //No longer an issue
     }
 
     public void continueScrolling() throws InterruptedException {
 
-        WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(10));
+        WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(6));
 
         Point source = driver.findElement(lblUsernameCard).getLocation();
         PointerInput finger = new PointerInput(PointerInput.Kind.TOUCH, "finger");
@@ -158,31 +158,49 @@ public class ProfilePage extends CommonPage{
         sequence.addAction(finger.createPointerDown(PointerInput.MouseButton.MIDDLE.asArg()));
         sequence.addAction(new Pause(finger, ofMillis(600)));
         sequence.addAction(finger.createPointerMove(ofMillis(600),
-                PointerInput.Origin.viewport(), source.x, source.y -  100900));
+                PointerInput.Origin.viewport(), source.x, source.y -  950));
         sequence.addAction(finger.createPointerUp(PointerInput.MouseButton.MIDDLE.asArg()));
 
         driver.perform(singletonList(sequence));
 
-        Thread.sleep(100);
+        this.setUserList();
+//        for (String element: set){
+//            System.out.println("Web elements list ===>"+element);
+//        }
+
         try {
-            this.setUserList();
-            for (String element: set){
-                System.out.println("Usernames list ===>"+element);
-            }
             wait.until(ExpectedConditions.elementToBeClickable(btnLoadMore)).click();
-//            Thread.sleep(2000);
-            isLoadMoreVisible = !driver.findElements(btnLoadMore).isEmpty();
+////            Thread.sleep(2000);
+//            isLoadMoreVisible = !driver.findElements(btnLoadMore).isEmpty();
         }
         catch (Exception e){
             e.printStackTrace();
-            isLoadMoreVisible = false;
-            this.setUserList();
-
+            System.out.println("Web elements array size ===>"+set.size());
             for (String element: set){
                 System.out.println("Web elements list ===>"+element);
             }
-
         }
+
+//        Thread.sleep(100);
+//        try {
+//            this.setUserList();
+//            for (String element: set){
+//                System.out.println("Usernames list ===>"+element);
+//            }
+//            wait.until(ExpectedConditions.elementToBeClickable(btnLoadMore)).click();
+////            Thread.sleep(2000);
+//            isLoadMoreVisible = !driver.findElements(btnLoadMore).isEmpty();
+//        }
+//        catch (Exception e){
+//            e.printStackTrace();
+//            isLoadMoreVisible = false;
+//            this.setUserList();
+//
+//            for (String element: set){
+//                System.out.println("Web elements list ===>"+element);
+//            }
+//
+//        }
     }
 
     public void setUserList(){
