@@ -14,9 +14,7 @@ import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
 import java.time.Duration;
-import java.util.Arrays;
-import java.util.Collections;
-import java.util.HashMap;
+import java.util.*;
 
 import static java.time.Duration.ofMillis;
 import static java.util.Collections.singletonList;
@@ -28,8 +26,11 @@ public class ProfilePage extends CommonPage{
     private final By btnSeeAllSuggestions = By.id("com.instagram.android:id/see_all_button");
     private final By btnLoadMore = By.id("com.instagram.android:id/row_load_more_button");
     private final By lblUsernameCard = By.xpath("//android.widget.LinearLayout[@resource-id='com.instagram.android:id/follow_list_container']");
+    private final By lblUsernames = By.xpath("//android.widget.TextView[@resource-id ='com.instagram.android:id/follow_list_username']");
 
     private boolean isLoadMoreVisible = true;
+    private List<String> set = new LinkedList<>();
+
 
 
     public void clickOnFollowingButton(){
@@ -42,7 +43,7 @@ public class ProfilePage extends CommonPage{
         return wait.until(ExpectedConditions.elementToBeClickable(lblLeastInteracted)).isDisplayed();
     }
 
-    public void scrollTillLoadMoreButtonDisplays() throws InterruptedException {
+    public void scrollTillLoadMoreButtonDisplays() {
 //        WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(60));
         initiateTheScrolling();
         try {
@@ -136,7 +137,10 @@ public class ProfilePage extends CommonPage{
         sequence.addAction(finger.createPointerUp(PointerInput.MouseButton.MIDDLE.asArg()));
 
         driver.perform(singletonList(sequence));
-
+        this.setUserList();
+        for (String element: set){
+            System.out.println("Web elements list ===>"+element);
+        }
         wait.until(ExpectedConditions.elementToBeClickable(btnLoadMore)).click();
     }
 
@@ -154,13 +158,17 @@ public class ProfilePage extends CommonPage{
         sequence.addAction(finger.createPointerDown(PointerInput.MouseButton.MIDDLE.asArg()));
         sequence.addAction(new Pause(finger, ofMillis(600)));
         sequence.addAction(finger.createPointerMove(ofMillis(600),
-                PointerInput.Origin.viewport(), source.x, source.y -  99900));
+                PointerInput.Origin.viewport(), source.x, source.y -  100900));
         sequence.addAction(finger.createPointerUp(PointerInput.MouseButton.MIDDLE.asArg()));
 
         driver.perform(singletonList(sequence));
 
         Thread.sleep(100);
         try {
+            this.setUserList();
+            for (String element: set){
+                System.out.println("Usernames list ===>"+element);
+            }
             wait.until(ExpectedConditions.elementToBeClickable(btnLoadMore)).click();
 //            Thread.sleep(2000);
             isLoadMoreVisible = !driver.findElements(btnLoadMore).isEmpty();
@@ -168,7 +176,24 @@ public class ProfilePage extends CommonPage{
         catch (Exception e){
             e.printStackTrace();
             isLoadMoreVisible = false;
+            this.setUserList();
+
+            for (String element: set){
+                System.out.println("Web elements list ===>"+element);
+            }
+
         }
+    }
+
+    public void setUserList(){
+//        driver.findElements(lblUsernames);
+        List<WebElement> we = driver.findElements(lblUsernames);
+
+        for (WebElement element: we){
+            this.set.add (element.getText());
+        }
+
+//        return set;
     }
 
 }
