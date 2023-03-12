@@ -18,7 +18,12 @@ public class ProfileManagementModule {
     }
     public static void scrollTillLoadMoreButtonDisplays() throws InterruptedException {
         profile.scrollTillLoadMoreButtonDisplays();
+        System.out.println(profile.getUserList().toString()); //for debugging only
     }
+    public static boolean isSuggestionTopicDisplaying(){
+        return profile.isSuggestionTopicDisplaying();
+    }
+
 
 
 }

@@ -1,10 +1,6 @@
 package com.instagram.android.page;
 
-import io.appium.java_client.AppiumBy;
-import io.appium.java_client.MobileBy;
-import io.appium.java_client.TouchAction;
 import org.openqa.selenium.By;
-import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.Point;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.interactions.Pause;
@@ -25,12 +21,20 @@ public class ProfilePage extends CommonPage{
     private final By lblLeastInteracted = By.xpath("//android.widget.LinearLayout[@content-desc='Least Interacted With']/android.widget.LinearLayout");
     private final By btnSeeAllSuggestions = By.id("com.instagram.android:id/see_all_button");
     private final By btnLoadMore = By.id("com.instagram.android:id/row_load_more_button");
-    private final By lblUsernameCard = By.xpath("//android.widget.LinearLayout[@resource-id='com.instagram.android:id/follow_list_container']");
+    private final By lblUsernameCard = By.xpath("(//android.widget.LinearLayout[@resource-id='com.instagram.android:id/follow_list_container'])[2]");
     private final By lblUsernames = By.xpath("//android.widget.TextView[@resource-id ='com.instagram.android:id/follow_list_username']");
+    private final By lblSuggestionTopic = By.id("com.instagram.android:id/row_header_textview");
 
-    private boolean isLoadMoreVisible = true;
-    private List<String> set = new LinkedList<>();
 
+    private boolean isScreenScrollable = true;
+    private HashSet<String> set = new HashSet<>();
+
+
+    //////
+//    Point source;
+
+
+    //////
 
 
     public void clickOnFollowingButton(){
@@ -46,15 +50,19 @@ public class ProfilePage extends CommonPage{
     public void scrollTillLoadMoreButtonDisplays() {
 //        WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(60));
         initiateTheScrolling();
-        try {
-//            Thread.sleep(2000);
-            while (isLoadMoreVisible) {
-                continueScrolling();
-            }
+        while (isScreenScrollable) {
+            continueScrolling();
         }
-        catch (Exception e){
-            e.printStackTrace();
-        }
+//        try {
+//            Thread.sleep(1000);
+//            while (isScreenScrollable) {
+//                continueScrolling();
+//            }
+////            this.continueScrolling();
+//        }
+//        catch (Exception e){
+//            e.printStackTrace();
+//        }
 
 
         }
@@ -123,7 +131,7 @@ public class ProfilePage extends CommonPage{
      */
 
     public void initiateTheScrolling(){
-        WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(20));
+//        WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(20));
 
         Point source = driver.findElement(lblLeastInteracted).getLocation();
         PointerInput finger = new PointerInput(PointerInput.Kind.TOUCH, "finger");
@@ -144,74 +152,124 @@ public class ProfilePage extends CommonPage{
 //        wait.until(ExpectedConditions.elementToBeClickable(btnLoadMore)).click(); //No longer an issue
     }
 
-    public void continueScrolling() throws InterruptedException {
-
+    public void continueScrolling() {
         WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(6));
+        wait.until(ExpectedConditions.visibilityOfElementLocated(lblUsernameCard));
 
+//        WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(6));
+
+//        finger = new PointerInput(PointerInput.Kind.TOUCH, "finger");
+////        sequence = new Sequence(finger, 1);
+//        sequence.addAction(finger.createPointerMove(ofMillis(0),
+//                PointerInput.Origin.viewport(), source.x, source.y));
+//        sequence.addAction(finger.createPointerDown(PointerInput.MouseButton.MIDDLE.asArg()));
+//        sequence.addAction(new Pause(finger, ofMillis(10)));
+//        sequence.addAction(finger.createPointerMove(ofMillis(600),
+//                PointerInput.Origin.viewport(), source.x, source.y -  950));
+//        sequence.addAction(finger.createPointerUp(PointerInput.MouseButton.MIDDLE.asArg()));
+//
+//        driver.perform(singletonList(sequence));
+//
+//        this.setUserList();
+////        for (String element: set){
+////            System.out.println("Web elements list ===>"+element);
+////        }
+//
+//        if (driver.findElements(btnLoadMore).isEmpty()) {
+//
+//            for (String element : set) {
+////                System.out.println("Username ===>" + element); //Disable to log the username
+////                try {
+////                    if (this.isSuggestionTopicDisplaying()){
+////                        this.isScreenScrollable = false;
+////                    }
+////                }
+////                catch (Exception e1){
+////                    e1.printStackTrace();
+////                }
+//                if (!driver.findElements(lblSuggestionTopic).isEmpty()) {
+//                    this.isSuggestionTopicDisplaying();
+//                    this.isScreenScrollable = false;
+//                }
+//            }
+//        }
+//
+////            if (wait.until(ExpectedConditions.elementToBeClickable(btnLoadMore)).isDisplayed()){
+//
+//
+//        else {
+//            driver.findElement(btnLoadMore).click();
+//        }
+//
+////        try {
+////            wait.until(ExpectedConditions.elementToBeClickable(btnLoadMore)).click();
+////////            Thread.sleep(2000);
+//////            isLoadMoreVisible = !driver.findElements(btnLoadMore).isEmpty();
+////        }
+////        catch (Exception e){
+////            e.printStackTrace();
+////
+////
+////        }
+//        System.out.println("Web elements array size --->"+set.size());
         Point source = driver.findElement(lblUsernameCard).getLocation();
         PointerInput finger = new PointerInput(PointerInput.Kind.TOUCH, "finger");
         Sequence sequence = new Sequence(finger, 1);
-//        finger = new PointerInput(PointerInput.Kind.TOUCH, "finger");
+        finger = new PointerInput(PointerInput.Kind.TOUCH, "finger");
 //        sequence = new Sequence(finger, 1);
         sequence.addAction(finger.createPointerMove(ofMillis(0),
                 PointerInput.Origin.viewport(), source.x, source.y));
         sequence.addAction(finger.createPointerDown(PointerInput.MouseButton.MIDDLE.asArg()));
-        sequence.addAction(new Pause(finger, ofMillis(600)));
+        sequence.addAction(new Pause(finger, ofMillis(100)));
         sequence.addAction(finger.createPointerMove(ofMillis(600),
-                PointerInput.Origin.viewport(), source.x, source.y -  950));
+                PointerInput.Origin.viewport(), source.x, source.y -  940));
         sequence.addAction(finger.createPointerUp(PointerInput.MouseButton.MIDDLE.asArg()));
 
         driver.perform(singletonList(sequence));
 
-        this.setUserList();
+
 //        for (String element: set){
 //            System.out.println("Web elements list ===>"+element);
 //        }
 
-        try {
-            wait.until(ExpectedConditions.elementToBeClickable(btnLoadMore)).click();
-////            Thread.sleep(2000);
-//            isLoadMoreVisible = !driver.findElements(btnLoadMore).isEmpty();
-        }
-        catch (Exception e){
-            e.printStackTrace();
-            System.out.println("Web elements array size ===>"+set.size());
-            for (String element: set){
-                System.out.println("Web elements list ===>"+element);
-            }
+        if (driver.findElements(btnLoadMore).isEmpty() && driver.findElements(lblSuggestionTopic).isEmpty()) {
+
+            this.setUserList();
         }
 
-//        Thread.sleep(100);
-//        try {
-//            this.setUserList();
-//            for (String element: set){
-//                System.out.println("Usernames list ===>"+element);
-//            }
-//            wait.until(ExpectedConditions.elementToBeClickable(btnLoadMore)).click();
-////            Thread.sleep(2000);
-//            isLoadMoreVisible = !driver.findElements(btnLoadMore).isEmpty();
-//        }
-//        catch (Exception e){
-//            e.printStackTrace();
-//            isLoadMoreVisible = false;
-//            this.setUserList();
-//
-//            for (String element: set){
-//                System.out.println("Web elements list ===>"+element);
-//            }
-//
-//        }
+//            if (wait.until(ExpectedConditions.elementToBeClickable(btnLoadMore)).isDisplayed()){
+
+
+        else {
+            if (driver.findElements(btnLoadMore).isEmpty()) {
+                driver.findElement(btnLoadMore).click();
+            }
+
+            else{
+                isScreenScrollable = false;
+            }
+
+        }
+
+        System.out.println("Web elements array size --->"+set.size());
     }
 
     public void setUserList(){
-//        driver.findElements(lblUsernames);
         List<WebElement> we = driver.findElements(lblUsernames);
 
         for (WebElement element: we){
             this.set.add (element.getText());
         }
+    }
 
-//        return set;
+    public HashSet<String> getUserList(){
+        return set;
+    }
+
+    public boolean isSuggestionTopicDisplaying(){
+        WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(30));
+        wait.until(ExpectedConditions.visibilityOfElementLocated(lblSuggestionTopic));
+        return driver.findElement(lblSuggestionTopic).isDisplayed();
     }
 
 }
