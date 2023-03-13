@@ -20,6 +20,9 @@ public class ProfileManagementModule {
         profile.scrollTillLoadMoreButtonDisplays();
         System.out.println(profile.getUserList().toString()); //for debugging only
     }
+    public static void scrollToTheEnd(){
+        profile.scrollToTheEnd();
+    }
     public static boolean isSuggestionTopicDisplaying(){
         return profile.isSuggestionTopicDisplaying();
     }

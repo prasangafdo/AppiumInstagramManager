@@ -254,6 +254,64 @@ public class ProfilePage extends CommonPage{
         System.out.println("Web elements array size --->"+set.size());
     }
 
+    public void scrollToTheEnd(){
+        //Using this to load all the elements completely
+        this.initiateTheScrolling();
+
+        while (isScreenScrollable) {
+//            continueScrolling();
+
+            WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(6));
+            wait.until(ExpectedConditions.visibilityOfElementLocated(lblUsernameCard));
+
+            Point source = driver.findElement(lblUsernameCard).getLocation();
+            PointerInput finger = new PointerInput(PointerInput.Kind.TOUCH, "finger");
+            Sequence sequence = new Sequence(finger, 1);
+            finger = new PointerInput(PointerInput.Kind.TOUCH, "finger");
+            sequence.addAction(finger.createPointerMove(ofMillis(0),
+                    PointerInput.Origin.viewport(), source.x, source.y));
+            sequence.addAction(finger.createPointerDown(PointerInput.MouseButton.MIDDLE.asArg()));
+            sequence.addAction(new Pause(finger, ofMillis(100)));
+            sequence.addAction(finger.createPointerMove(ofMillis(600),
+                    PointerInput.Origin.viewport(), source.x, source.y -  99900));
+            sequence.addAction(finger.createPointerUp(PointerInput.MouseButton.MIDDLE.asArg()));
+
+            driver.perform(singletonList(sequence));
+
+            List<WebElement> elements = driver.findElements(lblUsernames);
+            List<String> tempUsernames = new ArrayList<>();
+
+            for (WebElement we: elements){
+                tempUsernames.add(we.getText());
+            }
+            if (set.containsAll(tempUsernames)){
+                isScreenScrollable = false; //User has reached the end of the scrollable content
+            }
+
+            this.setUserList();
+
+            if (!driver.findElements(btnLoadMore).isEmpty()) {
+                driver.findElement(btnLoadMore).click();
+                this.setUserList();
+            }
+//
+//            else {
+//                if (driver.findElements(btnLoadMore).isEmpty()) {
+//                    driver.findElement(btnLoadMore).click();
+//                }
+//
+//                else{
+//                    isScreenScrollable = false;
+//                }
+//
+//            }
+
+            System.out.println("Web elements array size --->"+set.size());
+        }
+
+
+    }
+
     public void setUserList(){
         List<WebElement> we = driver.findElements(lblUsernames);
 
