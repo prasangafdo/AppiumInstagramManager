@@ -259,8 +259,6 @@ public class ProfilePage extends CommonPage{
         this.initiateTheScrolling();
 
         while (isScreenScrollable) {
-//            continueScrolling();
-
             WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(6));
             wait.until(ExpectedConditions.visibilityOfElementLocated(lblUsernameCard));
 
@@ -294,21 +292,12 @@ public class ProfilePage extends CommonPage{
                 driver.findElement(btnLoadMore).click();
                 this.setUserList();
             }
-//
-//            else {
-//                if (driver.findElements(btnLoadMore).isEmpty()) {
-//                    driver.findElement(btnLoadMore).click();
-//                }
-//
-//                else{
-//                    isScreenScrollable = false;
-//                }
-//
-//            }
 
-            System.out.println("Web elements array size --->"+set.size());
+//            System.out.println("Web elements array size --->"+set.size());
         }
+    }
 
+    public void scrollToTheTop(){
 
     }
 
