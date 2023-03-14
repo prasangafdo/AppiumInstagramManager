@@ -21,7 +21,7 @@ public class ProfilePage extends CommonPage{
     private final By lblLeastInteracted = By.xpath("//android.widget.LinearLayout[@content-desc='Least Interacted With']/android.widget.LinearLayout");
     private final By btnSeeAllSuggestions = By.id("com.instagram.android:id/see_all_button");
     private final By btnLoadMore = By.id("com.instagram.android:id/row_load_more_button");
-    private final By lblUsernameCard = By.xpath("(//android.widget.LinearLayout[@resource-id='com.instagram.android:id/follow_list_container'])[2]");
+    private final By lblUsernameCard = By.xpath("(//android.widget.LinearLayout[@resource-id='com.instagram.android:id/follow_list_container'])[1]");
     private final By lblUsernames = By.xpath("//android.widget.TextView[@resource-id ='com.instagram.android:id/follow_list_username']");
     private final By lblSuggestionTopic = By.id("com.instagram.android:id/row_header_textview");
 
@@ -282,14 +282,22 @@ public class ProfilePage extends CommonPage{
             for (WebElement we: elements){
                 tempUsernames.add(we.getText());
             }
+
             if (set.containsAll(tempUsernames)){
                 isScreenScrollable = false; //User has reached the end of the scrollable content
+                set.clear();
             }
 
-            this.setUserList();
+//            this.setUserList();
 
             if (!driver.findElements(btnLoadMore).isEmpty()) {
-                driver.findElement(btnLoadMore).click();
+                try {
+                    driver.findElement(btnLoadMore).click();
+                }
+                catch (Exception e){
+                    e.printStackTrace();
+                }
+
                 this.setUserList();
             }
 
@@ -298,6 +306,100 @@ public class ProfilePage extends CommonPage{
     }
 
     public void scrollToTheTop(){
+        //Move to the top of the screen
+        //Verify the scrolling is finished
+
+        isScreenScrollable = true;
+
+        while (isScreenScrollable) {
+            WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(6));
+            wait.until(ExpectedConditions.visibilityOfElementLocated(lblUsernameCard));
+
+            Point source = driver.findElement(lblUsernameCard).getLocation();
+            PointerInput finger = new PointerInput(PointerInput.Kind.TOUCH, "finger");
+            Sequence sequence = new Sequence(finger, 1);
+            finger = new PointerInput(PointerInput.Kind.TOUCH, "finger");
+            sequence.addAction(finger.createPointerMove(ofMillis(0),
+                    PointerInput.Origin.viewport(), source.x, source.y));
+            sequence.addAction(finger.createPointerDown(PointerInput.MouseButton.MIDDLE.asArg()));
+            sequence.addAction(new Pause(finger, ofMillis(100)));
+            sequence.addAction(finger.createPointerMove(ofMillis(600),
+                    PointerInput.Origin.viewport(), source.x, source.y + 99900));
+            sequence.addAction(finger.createPointerUp(PointerInput.MouseButton.MIDDLE.asArg()));
+
+            driver.perform(singletonList(sequence));
+
+//            List<WebElement> elements = driver.findElements(lblUsernames);
+////            List<String> tempUsernames = new ArrayList<>();
+//
+//            for (WebElement we : elements) {
+//                tempUsernames.add(we.getText());
+//            }
+            if (driver.findElements(lblLeastInteracted).size()>0) {
+                isScreenScrollable = false; //User has reached the end of the scrollable content
+            }
+
+//            this.setUserList();
+
+//            if (!driver.findElements(btnLoadMore).isEmpty()) {
+//                driver.findElement(btnLoadMore).click();
+//                this.setUserList();
+//            }
+        }
+        isScreenScrollable = true;
+    }
+
+    public void gatherElements(){
+        Point source = driver.findElement(lblLeastInteracted).getLocation();
+        PointerInput finger = new PointerInput(PointerInput.Kind.TOUCH, "finger");
+        Sequence sequence = new Sequence(finger, 1);
+        sequence.addAction(finger.createPointerMove(ofMillis(0),
+                PointerInput.Origin.viewport(), source.x, source.y));
+        sequence.addAction(finger.createPointerDown(PointerInput.MouseButton.MIDDLE.asArg()));
+        sequence.addAction(new Pause(finger, ofMillis(600)));
+        sequence.addAction(finger.createPointerMove(ofMillis(600),
+                PointerInput.Origin.viewport(), source.x, source.y -  900));
+        sequence.addAction(finger.createPointerUp(PointerInput.MouseButton.MIDDLE.asArg()));
+
+        driver.perform(singletonList(sequence));
+        this.setUserList();
+        while (isScreenScrollable) {
+            WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(6));
+            wait.until(ExpectedConditions.visibilityOfElementLocated(lblUsernameCard));
+
+            source = driver.findElement(lblUsernameCard).getLocation();
+            finger = new PointerInput(PointerInput.Kind.TOUCH, "finger");
+            sequence = new Sequence(finger, 1);
+            finger = new PointerInput(PointerInput.Kind.TOUCH, "finger");
+            sequence.addAction(finger.createPointerMove(ofMillis(0),
+                    PointerInput.Origin.viewport(), source.x, source.y));
+            sequence.addAction(finger.createPointerDown(PointerInput.MouseButton.MIDDLE.asArg()));
+            sequence.addAction(new Pause(finger, ofMillis(100)));
+            sequence.addAction(finger.createPointerMove(ofMillis(600),
+                    PointerInput.Origin.viewport(), source.x, source.y - 800));
+            sequence.addAction(finger.createPointerUp(PointerInput.MouseButton.MIDDLE.asArg()));
+
+            driver.perform(singletonList(sequence));
+
+            List<WebElement> elements = driver.findElements(lblUsernames);
+            List<String> tempUsernames = new ArrayList<>();
+
+            for (WebElement we: elements){
+                tempUsernames.add(we.getText());
+            }
+            if (set.containsAll(tempUsernames)){
+                isScreenScrollable = false; //User has reached the end of the scrollable content
+                System.out.println("line 390 triggered");
+            }
+            else this.setUserList();
+
+//            if (!driver.findElements(btnLoadMore).isEmpty()) {
+//                driver.findElement(btnLoadMore).click();
+//                this.setUserList();
+//            }
+
+//            System.out.println("Web elements array size --->"+set.size());
+        }
 
     }
 
@@ -307,6 +409,7 @@ public class ProfilePage extends CommonPage{
         for (WebElement element: we){
             this.set.add (element.getText());
         }
+        System.out.println(set.size());
     }
 
     public HashSet<String> getUserList(){

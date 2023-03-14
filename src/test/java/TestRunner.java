@@ -15,6 +15,8 @@ public class TestRunner {
         ProfileManagementModule.navigateToFollowingList();
         softAssert.assertTrue(ProfileManagementModule.isLeastInteractedLabelDisplaying());
         ProfileManagementModule.scrollToTheEnd();
+        ProfileManagementModule.scrollToTheTop();
+        ProfileManagementModule.gatherElements();
 
 //        ProfileManagementModule.scrollTillLoadMoreButtonDisplays();
 //        softAssert.assertTrue(ProfileManagementModule.isSuggestionTopicDisplaying());

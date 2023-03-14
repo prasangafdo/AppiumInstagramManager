@@ -23,6 +23,13 @@ public class ProfileManagementModule {
     public static void scrollToTheEnd(){
         profile.scrollToTheEnd();
     }
+    public static void scrollToTheTop(){
+        profile.scrollToTheTop();
+    }
+    public static void gatherElements(){
+        profile.gatherElements();
+        System.out.println(profile.getUserList().toString());
+    }
     public static boolean isSuggestionTopicDisplaying(){
         return profile.isSuggestionTopicDisplaying();
     }
