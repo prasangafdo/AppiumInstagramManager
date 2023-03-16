@@ -32,9 +32,13 @@ public class ProfileManagementModule {
     public static void scrollToTheTop(){
         profile.scrollToTheTop();
     }
-    public static void gatherElements(){
-        profile.gatherElements();
-        System.out.println(profile.getUserList().toString());
+    public static void gatherFollowers(){
+        profile.gatherFollowers();
+        System.out.println("Followers: "+profile.getUserList().toString());
+    }
+    public static void gatherFollowingUsers(){
+        profile.gatherFollowingUsers();
+        System.out.println("Following: "+profile.getUserList().toString());
     }
     public static boolean isSuggestionTopicDisplaying(){
         return profile.isSuggestionTopicDisplaying();

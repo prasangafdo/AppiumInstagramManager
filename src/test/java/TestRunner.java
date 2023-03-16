@@ -16,12 +16,13 @@ public class TestRunner {
         softAssert.assertTrue(ProfileManagementModule.isLeastInteractedLabelDisplaying());
         ProfileManagementModule.scrollToTheEnd();
         ProfileManagementModule.scrollToTheTop();
-        ProfileManagementModule.gatherElements();
-//        ProfileManagementModule.navigateToProfile();
+        ProfileManagementModule.gatherFollowingUsers();
+        ProfileManagementModule.navigateToProfile();
 //        ProfileManagementModule.navigateToFollowersList();
 //        softAssert.assertTrue(ProfileManagementModule.isRemoveButtonDisplaying());
 //        ProfileManagementModule.scrollToTheEnd();
 //        ProfileManagementModule.scrollToTheTop();
+//        ProfileManagementModule.gatherFollowers();
 //        softAssert.assertTrue(ProfileManagementModule.isSuggestionTopicDisplaying());
         softAssert.assertAll();
     }
