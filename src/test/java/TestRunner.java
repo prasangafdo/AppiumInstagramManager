@@ -17,9 +17,11 @@ public class TestRunner {
         ProfileManagementModule.scrollToTheEnd();
         ProfileManagementModule.scrollToTheTop();
         ProfileManagementModule.gatherElements();
-        ProfileManagementModule.navigateToProfile();
-        ProfileManagementModule.navigateToFollowersList();
-
+//        ProfileManagementModule.navigateToProfile();
+//        ProfileManagementModule.navigateToFollowersList();
+//        softAssert.assertTrue(ProfileManagementModule.isRemoveButtonDisplaying());
+//        ProfileManagementModule.scrollToTheEnd();
+//        ProfileManagementModule.scrollToTheTop();
 //        softAssert.assertTrue(ProfileManagementModule.isSuggestionTopicDisplaying());
         softAssert.assertAll();
     }

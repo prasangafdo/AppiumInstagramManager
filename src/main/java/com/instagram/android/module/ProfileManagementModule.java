@@ -19,6 +19,9 @@ public class ProfileManagementModule {
     public static boolean isLeastInteractedLabelDisplaying(){
         return profile.isLeastInteractedLabelDisplaying();
     }
+    public static boolean isRemoveButtonDisplaying(){
+        return profile.isRemoveButtonDisplaying();
+    }
     public static void scrollTillLoadMoreButtonDisplays() throws InterruptedException {
         profile.scrollTillLoadMoreButtonDisplays();
         System.out.println(profile.getUserList().toString()); //for debugging only

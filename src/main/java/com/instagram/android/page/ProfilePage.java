@@ -25,6 +25,7 @@ public class ProfilePage extends CommonPage{
     private final By lblUsernameCard = By.xpath("(//android.widget.LinearLayout[@resource-id='com.instagram.android:id/follow_list_container'])[1]");
     private final By lblUsernames = By.xpath("//android.widget.TextView[@resource-id ='com.instagram.android:id/follow_list_username']");
     private final By lblSuggestionTopic = By.id("com.instagram.android:id/row_header_textview");
+    private final By btnFirstRemove = By.xpath("(//android.widget.TextView[@text='Remove'])[1]");
 
 
     private boolean isScreenScrollable = true;
@@ -46,6 +47,11 @@ public class ProfilePage extends CommonPage{
     public boolean isLeastInteractedLabelDisplaying(){
         WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(60));
         return wait.until(ExpectedConditions.elementToBeClickable(lblLeastInteracted)).isDisplayed();
+    }
+
+    public boolean isRemoveButtonDisplaying(){
+        WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(60));
+        return wait.until(ExpectedConditions.elementToBeClickable(btnFirstRemove)).isDisplayed();
     }
 
     public void scrollTillLoadMoreButtonDisplays() {
@@ -208,7 +214,7 @@ public class ProfilePage extends CommonPage{
             List<String> tempUsernames = new ArrayList<>();
 
             for (WebElement we: elements){
-                set.add(we.getText());
+                tempUsernames.add(we.getText());
             }
 
             if (set.containsAll(tempUsernames)){
