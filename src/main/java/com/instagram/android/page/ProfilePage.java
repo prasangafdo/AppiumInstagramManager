@@ -18,6 +18,7 @@ import static java.util.Collections.singletonList;
 public class ProfilePage extends CommonPage{
 
     private final By btnFollowing = By.id("com.instagram.android:id/row_profile_header_following_container");
+    private final By btnFollowers = By.id("com.instagram.android:id/row_profile_header_followers_container");
     private final By lblLeastInteracted = By.xpath("//android.widget.LinearLayout[@content-desc='Least Interacted With']/android.widget.LinearLayout");
     private final By btnSeeAllSuggestions = By.id("com.instagram.android:id/see_all_button");
     private final By btnLoadMore = By.id("com.instagram.android:id/row_load_more_button");
@@ -30,17 +31,17 @@ public class ProfilePage extends CommonPage{
     private HashSet<String> set = new HashSet<>();
 
 
-    //////
-//    Point source;
-
-
-    //////
-
 
     public void clickOnFollowingButton(){
         WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(60));
         wait.until(ExpectedConditions.elementToBeClickable(btnFollowing)).click();
     }
+
+    public void clickOnFollowersButton(){
+        WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(60));
+        wait.until(ExpectedConditions.elementToBeClickable(btnFollowers)).click();
+    }
+
 
     public boolean isLeastInteractedLabelDisplaying(){
         WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(60));
@@ -66,73 +67,9 @@ public class ProfilePage extends CommonPage{
 
 
         }
-//        driver.findElementBy
-//        wait.until(ExpectedConditions.)
 
-//        WebElement element = driver.findElement(AppiumBy.androidUIAutomator("new UiScrollable(new UiSelector().scrollable(true).index(0)).scrollIntoView(new UiSelector().text(\"ruerr_g\"))"));
-
-//        driver.findElement(AppiumBy.androidUIAutomator("new UiScrollable(new UiSelector().scrollable(true))" +
-//                ".scrollIntoView(new UiSelector().resourceIdMatches(\"com.instagram.android:id/row_load_more_button\"))")); //id is correct. But scrolling doesn't work
-//
-//        driver.findElement(AppiumBy.androidUIAutomator(
-//                "new UiScrollable(new UiSelector().scrollable(true)).scrollToEnd(100000)"));
-
-//        Point source = dragMe.getCenter();
-//        Point target = driver.findElementByAccessibilityId("dropzone").getCenter();
-//        PointerInput finger = new PointerInput(PointerInput.Kind.TOUCH, "finger");
-//        Sequence dragNDrop = new Sequence(finger, 1);
-//        dragNDrop.addAction(finger.createPointerMove(Duration.ofMillis(0),
-//                PointerInput.Origin.viewport(), source.x, source.y));
-//        dragNDrop.addAction(finger.createPointerDown(PointerInput.MouseButton.LEFT.asArg()));
-//        dragNDrop.addAction(finger.createPointerMove(Duration.ofMillis(700),
-//                PointerInput.Origin.viewport(),target.x, target.y));
-//        dragNDrop.addAction(finger.createPointerUp(PointerInput.MouseButton.LEFT.asArg()));
-//        driver.perform(Arrays.asList(dragNDrop))
-//
-//        JavascriptExecutor js = (JavascriptExecutor) driver;
-//        HashMap<String, String> scrollObject = new HashMap<>();
-//        scrollObject.put("direction", "down");
-//        js.executeScript("mobile: swipe", scrollObject);
-
-
-//        int X = driver.findElement(lblLeastInteracted).getRect().x + (driver.findElement(lblLeastInteracted).getSize().width / 2);
-//        int StartY = driver.findElement(lblLeastInteracted).getRect().y + (driver.findElement(lblLeastInteracted).getSize().height / 4);
-//        int EndY = driver.findElement(lblLeastInteracted).getRect().y + (driver.findElement(lblLeastInteracted).getSize().height * 3 / 4);
-//
-//
-//        PointerInput finger = new PointerInput(PointerInput.Kind.TOUCH, "finger");
-//        Sequence dragNDrop = new Sequence(finger, 1);
-//        dragNDrop.addAction(finger.createPointerMove(Duration.ofSeconds(0),
-//                PointerInput.Origin.viewport(), X, StartY));
-//        dragNDrop.addAction(finger.createPointerDown(PointerInput.MouseButton.LEFT.asArg()));
-//        dragNDrop.addAction(finger.createPointerMove(Duration.ofMillis(700),
-//                PointerInput.Origin.viewport(), X, EndY));
-//        dragNDrop.addAction(finger.createPointerUp(PointerInput.MouseButton.LEFT.asArg()));
-//        driver.perform(Arrays.asList(dragNDrop));
-
-
-//        try {
-//            driver.findElement(btnLoadMore).isDisplayed();
-//        }
-//        catch (Exception e){
-//            e.printStackTrace();
-
-
-
-        /////////////////
-//
-//        wait.until(ExpectedConditions.visibilityOfElementLocated(lblLeastInteracted));
-
-    //}
-    /*
-    *   Do the scrolling while checking
-    *   whether the button is visible
-    *
-     */
 
     public void initiateTheScrolling(){
-//        WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(20));
-
         Point source = driver.findElement(lblLeastInteracted).getLocation();
         PointerInput finger = new PointerInput(PointerInput.Kind.TOUCH, "finger");
         Sequence sequence = new Sequence(finger, 1);
@@ -227,19 +164,10 @@ public class ProfilePage extends CommonPage{
 
         driver.perform(singletonList(sequence));
 
-
-//        for (String element: set){
-//            System.out.println("Web elements list ===>"+element);
-//        }
-
         if (driver.findElements(btnLoadMore).isEmpty() && driver.findElements(lblSuggestionTopic).isEmpty()) {
 
             this.setUserList();
         }
-
-//            if (wait.until(ExpectedConditions.elementToBeClickable(btnLoadMore)).isDisplayed()){
-
-
         else {
             if (driver.findElements(btnLoadMore).isEmpty()) {
                 driver.findElement(btnLoadMore).click();
@@ -280,7 +208,7 @@ public class ProfilePage extends CommonPage{
             List<String> tempUsernames = new ArrayList<>();
 
             for (WebElement we: elements){
-                tempUsernames.add(we.getText());
+                set.add(we.getText());
             }
 
             if (set.containsAll(tempUsernames)){
@@ -288,7 +216,7 @@ public class ProfilePage extends CommonPage{
                 set.clear();
             }
 
-//            this.setUserList();
+            this.setUserList();
 
             if (!driver.findElements(btnLoadMore).isEmpty()) {
                 try {

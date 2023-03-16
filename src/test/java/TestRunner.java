@@ -7,7 +7,7 @@ import org.testng.asserts.SoftAssert;
 public class TestRunner {
 
     @Test
-    public void navigateToFollowingList() throws InterruptedException {
+    public void navigateToFollowingList()  {
         SoftAssert softAssert = new SoftAssert();
         CommonPage commonPage = new CommonPage(); //Will update this later
         commonPage.setupDriver();
@@ -17,8 +17,9 @@ public class TestRunner {
         ProfileManagementModule.scrollToTheEnd();
         ProfileManagementModule.scrollToTheTop();
         ProfileManagementModule.gatherElements();
+        ProfileManagementModule.navigateToProfile();
+        ProfileManagementModule.navigateToFollowersList();
 
-//        ProfileManagementModule.scrollTillLoadMoreButtonDisplays();
 //        softAssert.assertTrue(ProfileManagementModule.isSuggestionTopicDisplaying());
         softAssert.assertAll();
     }

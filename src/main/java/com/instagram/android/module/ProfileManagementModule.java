@@ -13,6 +13,9 @@ public class ProfileManagementModule {
     public static void navigateToFollowingList(){
         profile.clickOnFollowingButton();
     }
+    public static void navigateToFollowersList(){
+        profile.clickOnFollowersButton();
+    }
     public static boolean isLeastInteractedLabelDisplaying(){
         return profile.isLeastInteractedLabelDisplaying();
     }
