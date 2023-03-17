@@ -22,23 +22,27 @@ public class ProfileManagementModule {
     public static boolean isRemoveButtonDisplaying(){
         return profile.isRemoveButtonDisplaying();
     }
-    public static void scrollTillLoadMoreButtonDisplays() throws InterruptedException {
-        profile.scrollTillLoadMoreButtonDisplays();
-        System.out.println(profile.getUserList().toString()); //for debugging only
-    }
+//    public static void scrollTillLoadMoreButtonDisplays() throws InterruptedException {
+//        profile.scrollTillLoadMoreButtonDisplays();
+//        System.out.println(profile.getUserList().toString()); //for debugging only
+//    }
     public static void scrollToTheEnd(){
         profile.scrollToTheEnd();
     }
+    public static void scrollToTheEndOfFollowingList(){
+        profile.scrollToTheEndOfFollowingList();
+    }
+
     public static void scrollToTheTop(){
         profile.scrollToTheTop();
     }
     public static void gatherFollowers(){
         profile.gatherFollowers();
-        System.out.println("Followers: "+profile.getUserList().toString());
+        System.out.println("Followers: "+profile.getFollowersSet().toString());
     }
     public static void gatherFollowingUsers(){
         profile.gatherFollowingUsers();
-        System.out.println("Following: "+profile.getUserList().toString());
+        System.out.println("Following: "+profile.getFollowingUsersSet().toString());
     }
     public static boolean isSuggestionTopicDisplaying(){
         return profile.isSuggestionTopicDisplaying();

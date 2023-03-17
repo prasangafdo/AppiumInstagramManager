@@ -18,11 +18,11 @@ public class TestRunner {
         ProfileManagementModule.scrollToTheTop();
         ProfileManagementModule.gatherFollowingUsers();
         ProfileManagementModule.navigateToProfile();
-//        ProfileManagementModule.navigateToFollowersList();
-//        softAssert.assertTrue(ProfileManagementModule.isRemoveButtonDisplaying());
-//        ProfileManagementModule.scrollToTheEnd();
-//        ProfileManagementModule.scrollToTheTop();
-//        ProfileManagementModule.gatherFollowers();
+        ProfileManagementModule.navigateToFollowersList();
+        softAssert.assertTrue(ProfileManagementModule.isRemoveButtonDisplaying());
+        ProfileManagementModule.scrollToTheEndOfFollowingList(); //not working
+        ProfileManagementModule.scrollToTheTop();
+        ProfileManagementModule.gatherFollowers();
 //        softAssert.assertTrue(ProfileManagementModule.isSuggestionTopicDisplaying());
         softAssert.assertAll();
     }

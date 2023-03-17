@@ -78,6 +78,9 @@ public class ProfilePage extends CommonPage{
 
 
     public void initiateTheScrolling(){
+        if (!tempUsersSet.isEmpty()){
+            tempUsersSet.clear();
+        }
         Point source = driver.findElement(lblLeastInteracted).getLocation();
         PointerInput finger = new PointerInput(PointerInput.Kind.TOUCH, "finger");
         Sequence sequence = new Sequence(finger, 1);
@@ -201,6 +204,74 @@ public class ProfilePage extends CommonPage{
             Point source = driver.findElement(lblUsernameCard).getLocation();
             PointerInput finger = new PointerInput(PointerInput.Kind.TOUCH, "finger");
             Sequence sequence = new Sequence(finger, 1);
+            finger = new PointerInput(PointerInput.Kind.TOUCH, "finger");
+            sequence.addAction(finger.createPointerMove(ofMillis(0),
+                    PointerInput.Origin.viewport(), source.x, source.y));
+            sequence.addAction(finger.createPointerDown(PointerInput.MouseButton.MIDDLE.asArg()));
+            sequence.addAction(new Pause(finger, ofMillis(100)));
+            sequence.addAction(finger.createPointerMove(ofMillis(600),
+                    PointerInput.Origin.viewport(), source.x, source.y -  99900));
+            sequence.addAction(finger.createPointerUp(PointerInput.MouseButton.MIDDLE.asArg()));
+
+            driver.perform(singletonList(sequence));
+
+            List<WebElement> elements = driver.findElements(lblUsernames);
+            List<String> tempUsernames = new ArrayList<>();
+
+            for (WebElement we: elements){
+                tempUsernames.add(we.getText());
+            }
+
+            if (tempUsersSet.containsAll(tempUsernames)){
+                isScreenScrollable = false; //User has reached the end of the scrollable content
+                tempUsersSet.clear();
+            }
+
+            this.setUserList();
+
+            if (!driver.findElements(btnLoadMore).isEmpty()) {
+                try {
+                    driver.findElement(btnLoadMore).click();
+                }
+                catch (Exception e){
+                    e.printStackTrace();
+                }
+
+                this.setUserList();
+            }
+
+//            System.out.println("Web elements array size --->"+set.size());
+        }
+    }
+
+    public void scrollToTheEndOfFollowingList(){
+        //Using this to load all the elements completely
+        if (!tempUsersSet.isEmpty()){
+            tempUsersSet.clear();
+        }
+        Point source = driver.findElement(btnFirstRemove).getLocation();
+        PointerInput finger = new PointerInput(PointerInput.Kind.TOUCH, "finger");
+        Sequence sequence = new Sequence(finger, 1);
+        sequence.addAction(finger.createPointerMove(ofMillis(0),
+                PointerInput.Origin.viewport(), source.x, source.y));
+        sequence.addAction(finger.createPointerDown(PointerInput.MouseButton.MIDDLE.asArg()));
+        sequence.addAction(new Pause(finger, ofMillis(600)));
+        sequence.addAction(finger.createPointerMove(ofMillis(600),
+                PointerInput.Origin.viewport(), source.x, source.y -  900));
+        sequence.addAction(finger.createPointerUp(PointerInput.MouseButton.MIDDLE.asArg()));
+
+        driver.perform(singletonList(sequence));
+        this.setFollowersUserList();
+
+        isScreenScrollable = true;
+
+        while (isScreenScrollable) {
+            WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(6));
+            wait.until(ExpectedConditions.visibilityOfElementLocated(lblUsernameCard));
+
+            source = driver.findElement(lblUsernameCard).getLocation();
+            finger = new PointerInput(PointerInput.Kind.TOUCH, "finger");
+            sequence = new Sequence(finger, 1);
             finger = new PointerInput(PointerInput.Kind.TOUCH, "finger");
             sequence.addAction(finger.createPointerMove(ofMillis(0),
                     PointerInput.Origin.viewport(), source.x, source.y));
@@ -420,8 +491,12 @@ public class ProfilePage extends CommonPage{
         System.out.println(followersUsersSet.size());
     }
 
-    public HashSet<String> getUserList(){
+    public HashSet<String> getFollowingUsersSet(){
         return followingUsersSet;
+    }
+
+    public HashSet<String> getFollowersSet(){
+        return followersUsersSet;
     }
 
     public boolean isSuggestionTopicDisplaying(){
