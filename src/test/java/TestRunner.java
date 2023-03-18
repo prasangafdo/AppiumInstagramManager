@@ -20,10 +20,12 @@ public class TestRunner {
         ProfileManagementModule.navigateToProfile();
         ProfileManagementModule.navigateToFollowersList();
         softAssert.assertTrue(ProfileManagementModule.isRemoveButtonDisplaying());
-        ProfileManagementModule.scrollToTheEndOfFollowingList(); //not working
+        ProfileManagementModule.scrollToTheEndOfFollowingList();
         ProfileManagementModule.scrollToTheTop();
-        ProfileManagementModule.gatherFollowers();
+        ProfileManagementModule.gatherFollowers();//Not working. Needs separate method
 //        softAssert.assertTrue(ProfileManagementModule.isSuggestionTopicDisplaying());
         softAssert.assertAll();
     }
+
+    //add more test scenarios
 }

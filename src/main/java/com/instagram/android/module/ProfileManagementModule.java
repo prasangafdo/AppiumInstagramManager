@@ -38,11 +38,11 @@ public class ProfileManagementModule {
     }
     public static void gatherFollowers(){
         profile.gatherFollowers();
-        System.out.println("Followers: "+profile.getFollowersSet().toString());
+        System.out.println("Followers: "+profile.getFollowersSet().size()+profile.getFollowersSet().toString());
     }
     public static void gatherFollowingUsers(){
         profile.gatherFollowingUsers();
-        System.out.println("Following: "+profile.getFollowingUsersSet().toString());
+        System.out.println("Following: "+profile.getFollowingUsersSet().size()+profile.getFollowingUsersSet().toString());
     }
     public static boolean isSuggestionTopicDisplaying(){
         return profile.isSuggestionTopicDisplaying();
