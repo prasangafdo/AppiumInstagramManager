@@ -34,6 +34,7 @@ public class ProfilePage extends CommonPage{
     private HashSet<String> followingUsersSet = new HashSet<>();
     private HashSet<String> followersUsersSet = new HashSet<>();
     private HashSet<String> tempUsersSet = new HashSet<>();
+    private HashSet<String> usersToUnfollow = new HashSet<>();
 
 
 
@@ -444,6 +445,7 @@ public class ProfilePage extends CommonPage{
 
 //            System.out.println("Web elements array size --->"+set.size());
         }
+        this.setUsersToUnfollow();
 
     }
 
@@ -531,6 +533,13 @@ public class ProfilePage extends CommonPage{
         WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(30));
         wait.until(ExpectedConditions.visibilityOfElementLocated(lblSuggestionTopic));
         return driver.findElement(lblSuggestionTopic).isDisplayed();
+    }
+
+    public void setUsersToUnfollow(){
+        System.out.println("Initial size: "+followingUsersSet.size());
+        followingUsersSet.removeAll(followersUsersSet);
+        System.out.println("After filtration: "+followingUsersSet.size());
+        //HashSet<String>
     }
 
 }
