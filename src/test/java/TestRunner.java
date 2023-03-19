@@ -1,6 +1,7 @@
-import com.beust.ah.A;
 import com.instagram.android.module.ProfileManagementModule;
 import com.instagram.android.page.CommonPage;
+import org.testng.annotations.BeforeClass;
+import org.testng.annotations.BeforeTest;
 import org.testng.annotations.Test;
 import org.testng.asserts.SoftAssert;
 
@@ -10,11 +11,17 @@ import java.util.List;
 
 public class TestRunner {
 
+    @BeforeTest
+    public void setUp(){
+        CommonPage.setUpDriver();
+    }
+
+
+
     @Test
     public void navigateToFollowingList()  {
         SoftAssert softAssert = new SoftAssert();
-        CommonPage commonPage = new CommonPage(); //Will update this later
-        commonPage.setupDriver();
+//        CommonPage commonPage = new CommonPage(); //Will update this later
         ProfileManagementModule.navigateToProfile();
         ProfileManagementModule.navigateToFollowingList();
         softAssert.assertTrue(ProfileManagementModule.isLeastInteractedLabelDisplaying());
