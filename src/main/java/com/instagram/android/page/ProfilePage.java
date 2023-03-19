@@ -383,8 +383,6 @@ public class ProfilePage extends CommonPage{
 
 //            System.out.println("Web elements array size --->"+set.size());
         }
-        this.setUsersToUnfollow();
-
     }
 
     public void gatherFollowingUsers(){
@@ -478,8 +476,8 @@ public class ProfilePage extends CommonPage{
         followingUsersSet.removeAll(followersUsersSet);
         System.out.println("After filtration: "+followingUsersSet.size());
 //        System.out.println(followingUsersSet);
-        for(String str: followersUsersSet){
-            System.out.print(str.concat(" "));
+        for(String str: followingUsersSet){
+            System.out.println(str.concat(" "));
         }
     }
 

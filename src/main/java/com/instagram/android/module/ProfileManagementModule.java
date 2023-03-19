@@ -65,6 +65,11 @@ public class ProfileManagementModule {
             e.printStackTrace();
         }
     }
+
+    public static void setUsersToUnfollow(){
+        profile.setUsersToUnfollow();
+    }
+
     public static boolean isSuggestionTopicDisplaying(){
         return profile.isSuggestionTopicDisplaying();
     }
