@@ -9,7 +9,10 @@ import java.net.URL;
 public class CommonPage {
     public static DesiredCapabilities cap = new DesiredCapabilities();
     private URL url = null;
-    public static AppiumDriver driver;
+    static AppiumDriver driver;
+    private static final CommonPage commonPage = new CommonPage();
+
+
 
     public CommonPage()  {
         try {
@@ -27,7 +30,7 @@ public class CommonPage {
         cap.setCapability("noReset", "true");
     }
 
-    public void setupDriver(){
+    public void setupDriverEnvironment(){
 
         try {
             driver = new AppiumDriver(url, cap);
@@ -35,4 +38,9 @@ public class CommonPage {
             e.printStackTrace();
         }
     }
+
+    public static void setUpDriver(){
+        commonPage.setupDriverEnvironment();
+    }
+
 }
