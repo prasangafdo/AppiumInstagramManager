@@ -1,5 +1,6 @@
 package com.instagram.android.page;
 
+import com.instagram.android.util.FileWriter;
 import org.openqa.selenium.By;
 import org.openqa.selenium.Point;
 import org.openqa.selenium.WebElement;
@@ -9,7 +10,7 @@ import org.openqa.selenium.interactions.Sequence;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
-import java.io.FileWriter;
+
 import java.io.IOException;
 import java.time.Duration;
 import java.util.*;
@@ -38,7 +39,7 @@ public class ProfilePage extends CommonPage{
     private HashSet<String> tempUsersSet = new HashSet<>();
     private HashSet<String> usersToUnfollow = new HashSet<>();
 
-
+    private static FileWriter fileWriter = new FileWriter();
 
     public void clickOnFollowingButton(){
         WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(60));
@@ -477,21 +478,25 @@ public class ProfilePage extends CommonPage{
         System.out.println("Initial size: " + followingUsersSet.size());
         followingUsersSet.removeAll(followersUsersSet);
         System.out.println("After filtration: " + followingUsersSet.size());
+
+        fileWriter.writeUsersToUnfollow(followingUsersSet);
 //        System.out.println(followingUsersSet);
 //        for(String str: followingUsersSet){
 //            System.out.println(str.concat(" "));
 //        }
-        try {
-            FileWriter myWriter = new FileWriter("usersToUnfollow.txt");
-            for (String str : followingUsersSet) {
-                myWriter.write(str + ",");
-            }
+//        try {
+//            FileWriter myWriter = new FileWriter("usersToUnfollow.txt");
+//            for (String str : followingUsersSet) {
+//                myWriter.write(str + ",");
+//            }
+//
+//            myWriter.close();
+//            System.out.println("Successfully wrote to the file.");
+//
+//        } catch (IOException e) {
+//            e.printStackTrace();
+//        }
 
-            myWriter.close();
-            System.out.println("Successfully wrote to the file.");
 
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
     }
     }
