@@ -51,8 +51,9 @@ public class TestRunner {
         softAssert.assertTrue(ProfileManagementModule.isRemoveButtonDisplaying());
         ProfileManagementModule.scrollToTheEndOfFollowingList();
         ProfileManagementModule.scrollToTheTop();
-        ProfileManagementModule.gatherFollowers();//Not working. Needs separate method
-        ProfileManagementModule.setUsersToUnfollow();//Not working. Needs separate method
+        ProfileManagementModule.gatherFollowers();
+        ProfileManagementModule.setUsersToUnfollow();
+
         softAssert.assertAll();
     }
 

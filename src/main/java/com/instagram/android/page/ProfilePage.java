@@ -9,6 +9,8 @@ import org.openqa.selenium.interactions.Sequence;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
+import java.io.FileWriter;
+import java.io.IOException;
 import java.time.Duration;
 import java.util.*;
 
@@ -471,14 +473,25 @@ public class ProfilePage extends CommonPage{
         return driver.findElement(lblSuggestionTopic).isDisplayed();
     }
 
-    public void setUsersToUnfollow(){
-        System.out.println("Initial size: "+followingUsersSet.size());
+    public void setUsersToUnfollow() {
+        System.out.println("Initial size: " + followingUsersSet.size());
         followingUsersSet.removeAll(followersUsersSet);
-        System.out.println("After filtration: "+followingUsersSet.size());
+        System.out.println("After filtration: " + followingUsersSet.size());
 //        System.out.println(followingUsersSet);
-        for(String str: followingUsersSet){
-            System.out.println(str.concat(" "));
+//        for(String str: followingUsersSet){
+//            System.out.println(str.concat(" "));
+//        }
+        try {
+            FileWriter myWriter = new FileWriter("usersToUnfollow.txt");
+            for (String str : followingUsersSet) {
+                myWriter.write(str + ",");
+            }
+
+            myWriter.close();
+            System.out.println("Successfully wrote to the file.");
+
+        } catch (IOException e) {
+            e.printStackTrace();
         }
     }
-
-}
+    }
