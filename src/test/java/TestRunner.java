@@ -16,12 +16,11 @@ public class TestRunner {
         CommonPage.setUpDriver();
     }
 
-
+//Update files location, add separate methods
 
     @Test
-    public void navigateToFollowingList()  {
+    public void gatherUsersWhoDontFollowBack()  {
         SoftAssert softAssert = new SoftAssert();
-//        CommonPage commonPage = new CommonPage(); //Will update this later
         ProfileManagementModule.navigateToProfile();
         ProfileManagementModule.navigateToFollowingList();
         softAssert.assertTrue(ProfileManagementModule.isLeastInteractedLabelDisplaying());
@@ -35,7 +34,25 @@ public class TestRunner {
         ProfileManagementModule.scrollToTheTop();
         ProfileManagementModule.gatherFollowers();//Not working. Needs separate method
         ProfileManagementModule.setUsersToUnfollow();//Not working. Needs separate method
-//        softAssert.assertTrue(ProfileManagementModule.isSuggestionTopicDisplaying());
+        softAssert.assertAll();
+    }
+
+    @Test
+    public void unfollowUsersWhoDontFollowBack()  {
+        SoftAssert softAssert = new SoftAssert();
+        ProfileManagementModule.navigateToProfile();
+        ProfileManagementModule.navigateToFollowingList();
+        softAssert.assertTrue(ProfileManagementModule.isLeastInteractedLabelDisplaying());
+        ProfileManagementModule.scrollToTheEnd();
+        ProfileManagementModule.scrollToTheTop();
+        ProfileManagementModule.gatherFollowingUsers();
+        ProfileManagementModule.navigateToProfile();
+        ProfileManagementModule.navigateToFollowersList();
+        softAssert.assertTrue(ProfileManagementModule.isRemoveButtonDisplaying());
+        ProfileManagementModule.scrollToTheEndOfFollowingList();
+        ProfileManagementModule.scrollToTheTop();
+        ProfileManagementModule.gatherFollowers();//Not working. Needs separate method
+        ProfileManagementModule.setUsersToUnfollow();//Not working. Needs separate method
         softAssert.assertAll();
     }
 
