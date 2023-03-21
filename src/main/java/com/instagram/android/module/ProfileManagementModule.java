@@ -5,6 +5,7 @@ import com.instagram.android.page.ProfilePage;
 
 import java.io.FileWriter;
 import java.io.IOException;
+import java.util.HashSet;
 
 public class ProfileManagementModule {
     private static final LandingPage landing = new LandingPage();
@@ -72,6 +73,10 @@ public class ProfileManagementModule {
 
     public static void unfollowUsers(){
         profile.unfollowUsers();
+    }
+
+    public static HashSet<String> getUsersToUnfollow(){
+        return getUsersToUnfollow();
     }
 
     public static void navigateToSearch(){
