@@ -11,7 +11,6 @@ import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
 
-import java.io.IOException;
 import java.time.Duration;
 import java.util.*;
 
@@ -52,7 +51,6 @@ public class ProfilePage extends CommonPage{
         wait.until(ExpectedConditions.elementToBeClickable(btnFollowers)).click();
     }
 
-
     public boolean isLeastInteractedLabelDisplaying(){
         WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(60));
         return wait.until(ExpectedConditions.elementToBeClickable(lblLeastInteracted)).isDisplayed();
@@ -62,27 +60,6 @@ public class ProfilePage extends CommonPage{
         WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(60));
         return wait.until(ExpectedConditions.elementToBeClickable(btnFirstRemove)).isDisplayed();
     }
-
-    public void scrollTillLoadMoreButtonDisplays() {
-//        WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(60));
-        //initiateTheScrolling();
-        while (isScreenScrollable) {
-            continueScrolling();
-        }
-//        try {
-//            Thread.sleep(1000);
-//            while (isScreenScrollable) {
-//                continueScrolling();
-//            }
-////            this.continueScrolling();
-//        }
-//        catch (Exception e){
-//            e.printStackTrace();
-//        }
-
-
-        }
-
 
     public void initiateTheScrolling(){
         if (!tempUsersSet.isEmpty()){
@@ -483,11 +460,16 @@ public class ProfilePage extends CommonPage{
         fileWriter.writeUsersToUnfollow(followingUsersSet);
         }
 
+    public HashSet<String> getUsersToUnfollow(){
+        return followingUsersSet;
+    }
+
     public void unfollowUsers(){
-        followingUsersSet.add("dizza2k");
+        followingUsersSet.add("nadeeshani_de_silva");
         for (String username:followingUsersSet) {
             searchPage.searchByUsername(username);
-            searchPage.selectAccounts();
+            searchPage.selectAccountsFromTabs();
+            searchPage.selectFirstRecordFromSearchResults();
         }
 
     }
