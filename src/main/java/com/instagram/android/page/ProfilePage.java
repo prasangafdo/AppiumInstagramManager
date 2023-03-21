@@ -40,6 +40,7 @@ public class ProfilePage extends CommonPage{
     private HashSet<String> usersToUnfollow = new HashSet<>();
 
     private static FileWriter fileWriter = new FileWriter();
+    private static SearchPage searchPage = new SearchPage();
 
     public void clickOnFollowingButton(){
         WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(60));
@@ -268,7 +269,7 @@ public class ProfilePage extends CommonPage{
         for (WebElement element: we){
             this.tempUsersSet.add (element.getText());
         }
-        System.out.println(tempUsersSet.size());
+//        System.out.println(tempUsersSet.size());
     }
 
     public void scrollToTheTop(){
@@ -480,23 +481,16 @@ public class ProfilePage extends CommonPage{
         System.out.println("After filtration: " + followingUsersSet.size());
 
         fileWriter.writeUsersToUnfollow(followingUsersSet);
-//        System.out.println(followingUsersSet);
-//        for(String str: followingUsersSet){
-//            System.out.println(str.concat(" "));
-//        }
-//        try {
-//            FileWriter myWriter = new FileWriter("usersToUnfollow.txt");
-//            for (String str : followingUsersSet) {
-//                myWriter.write(str + ",");
-//            }
-//
-//            myWriter.close();
-//            System.out.println("Successfully wrote to the file.");
-//
-//        } catch (IOException e) {
-//            e.printStackTrace();
-//        }
+        }
 
+    public void unfollowUsers(){
+        followingUsersSet.add("dizza2k");
+        for (String username:followingUsersSet) {
+            searchPage.searchByUsername(username);
+            searchPage.selectAccounts();
+        }
 
     }
     }
+
+

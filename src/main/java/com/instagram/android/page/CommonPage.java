@@ -28,6 +28,8 @@ public class CommonPage {
         cap.setCapability("appPackage", "com.instagram.android");
         cap.setCapability("appActivity", "com.instagram.mainactivity.MainActivity");
         cap.setCapability("noReset", "true");
+        cap.setCapability("unicodeKeyboard", "true");
+        cap.setCapability("resetKeyboard", "true");
     }
 
     public void setupDriverEnvironment(){

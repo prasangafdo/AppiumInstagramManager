@@ -70,6 +70,16 @@ public class ProfileManagementModule {
         profile.setUsersToUnfollow();
     }
 
+    public static void unfollowUsers(){
+        profile.unfollowUsers();
+    }
+
+    public static void navigateToSearch(){
+        landing.clickOnSearchButton();
+    }
+
+
+
     public static boolean isSuggestionTopicDisplaying(){
         return profile.isSuggestionTopicDisplaying();
     }
