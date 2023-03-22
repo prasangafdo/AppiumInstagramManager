@@ -1,6 +1,6 @@
 import com.instagram.android.module.ProfileManagementModule;
+import com.instagram.android.module.SearchModule;
 import com.instagram.android.page.CommonPage;
-import org.testng.annotations.BeforeClass;
 import org.testng.annotations.BeforeTest;
 import org.testng.annotations.Test;
 import org.testng.asserts.SoftAssert;
@@ -54,7 +54,8 @@ public class TestRunner {
 //        ProfileManagementModule.gatherFollowers();
 //        ProfileManagementModule.setUsersToUnfollow();
         ProfileManagementModule.navigateToSearch();
-        ProfileManagementModule.unfollowUsers();
+        SearchModule.searchByUsername();
+//        ProfileManagementModule.unfollowUsers();
 
         softAssert.assertAll();
     }

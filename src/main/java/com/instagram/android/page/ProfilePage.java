@@ -461,18 +461,12 @@ public class ProfilePage extends CommonPage{
         }
 
     public HashSet<String> getUsersToUnfollow(){
-        return followingUsersSet;
+        HashSet<String> tempTest = new HashSet<>();
+        tempTest.add("kalpani_amanda");
+        tempTest.add("___.himaa___");
+        return tempTest;
     }
 
-    public void unfollowUsers(){
-        followingUsersSet.add("nadeeshani_de_silva");
-        for (String username:followingUsersSet) {
-            searchPage.searchByUsername(username);
-            searchPage.selectAccountsFromTabs();
-            searchPage.selectFirstRecordFromSearchResults();
-        }
-
-    }
     }
 
 

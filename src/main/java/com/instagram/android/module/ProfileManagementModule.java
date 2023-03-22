@@ -71,9 +71,9 @@ public class ProfileManagementModule {
         profile.setUsersToUnfollow();
     }
 
-    public static void unfollowUsers(){
-        profile.unfollowUsers();
-    }
+//    public static void unfollowUsers(){
+//        profile.unfollowUsers();
+//    }
 
     public static HashSet<String> getUsersToUnfollow(){
         return getUsersToUnfollow();
