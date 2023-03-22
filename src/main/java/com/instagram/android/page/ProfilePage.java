@@ -462,8 +462,10 @@ public class ProfilePage extends CommonPage{
 
     public HashSet<String> getUsersToUnfollow(){
         HashSet<String> tempTest = new HashSet<>();
-        tempTest.add("kalpani_amanda");
-        tempTest.add("___.himaa___");
+        tempTest.add("piyumi__wathsala__");
+        tempTest.add("supuni_witharanage_");
+        tempTest.add("bhaagi_99");
+        tempTest.add("nex_thmini");
         return tempTest;
     }
 

@@ -12,7 +12,7 @@ import java.util.List;
 public class TestRunner {
 
     @BeforeTest
-    public void setUp(){
+    public void setup(){
         CommonPage.setUpDriver();
     }
 
@@ -38,7 +38,7 @@ public class TestRunner {
     }
 
     @Test
-    public void unfollowUsersWhoDontFollowBack()  {
+    public void unfollowUsersWhoDontFollowBack() throws InterruptedException {
         SoftAssert softAssert = new SoftAssert();
 //        ProfileManagementModule.navigateToProfile();
 //        ProfileManagementModule.navigateToFollowingList();
