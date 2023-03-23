@@ -45,4 +45,9 @@ public class CommonPage {
         commonPage.setupDriverEnvironment();
     }
 
+    public static void endSession(){
+        driver.quit();
+        driver.close();
+    }
+
 }
