@@ -418,6 +418,8 @@ public class ProfilePage extends CommonPage{
 //            System.out.println("Web elements array size --->"+set.size());
         }
 
+        fileWriter.writeUsersIFollow(this.getFollowingUsersSet());
+
     }
 
     public void setFollowingUserList(){

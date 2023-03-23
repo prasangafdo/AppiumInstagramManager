@@ -55,16 +55,16 @@ public class ProfileManagementModule {
     }
     public static void gatherFollowingUsers(){
         profile.gatherFollowingUsers();
-        System.out.println("Following: "+profile.getFollowingUsersSet().size()+profile.getFollowingUsersSet().toString());
-        try {
-            FileWriter myWriter = new FileWriter("following.txt");
-            myWriter.write("Following: "+profile.getFollowingUsersSet().size()+profile.getFollowingUsersSet().toString());
-            myWriter.close();
-            System.out.println("Successfully wrote to the file.");
-        } catch (IOException e) {
-            System.out.println("An error occurred.");
-            e.printStackTrace();
-        }
+//        System.out.println("Following: "+profile.getFollowingUsersSet().size()+profile.getFollowingUsersSet().toString());
+//        try {
+//            FileWriter myWriter = new FileWriter("following.txt");
+//            myWriter.write("Following: "+profile.getFollowingUsersSet().size()+profile.getFollowingUsersSet().toString());
+//            myWriter.close();
+//            System.out.println("Successfully wrote to the file.");
+//        } catch (IOException e) {
+//            System.out.println("An error occurred.");
+//            e.printStackTrace();
+//        }
     }
 
     public static void setUsersToUnfollow(){
@@ -88,6 +88,9 @@ public class ProfileManagementModule {
     public static boolean isSuggestionTopicDisplaying(){
         return profile.isSuggestionTopicDisplaying();
     }
+//    public static void endSession(){
+//        .endSession();
+//    }
 
 
 

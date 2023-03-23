@@ -10,10 +10,26 @@ import org.testng.annotations.Test;
 public class FileWriter {
 
     public String usersToUnfollow = "./src/main/resources/usersToUnfollow.csv";
+    public String usersIFollow = "./src/main/resources/usersIFollow.csv";
 
-    public void writeUsersToUnfollow(HashSet<String> list){
+    public void writeUsersToUnfollow(HashSet<String> list) {
         try {
             java.io.FileWriter myWriter = new java.io.FileWriter(usersToUnfollow);
+            for (String str : list) {
+                myWriter.write(str + ",");
+            }
+            myWriter.close();
+            System.out.println("Successfully wrote to usersToUnfollow.csv");
+
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+
+    @Test
+    public void writeUsersIFollow(HashSet<String> list) {
+        try {
+            java.io.FileWriter myWriter = new java.io.FileWriter(usersIFollow);
             for (String str : list) {
                 myWriter.write(str + ",");
             }
@@ -24,14 +40,4 @@ public class FileWriter {
             e.printStackTrace();
         }
     }
-//
-//    @Test
-//    public void aaa(){
-//        sss.add("lyuuikl");
-//        sss.add("dfgdfg");
-//        sss.add("hgfsh");
-//        sss.add("fhdh");
-//
-//        this.writeUsersToUnfollow(sss);
-//    }
 }
