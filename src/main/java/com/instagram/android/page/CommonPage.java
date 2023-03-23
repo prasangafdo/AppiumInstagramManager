@@ -47,7 +47,6 @@ public class CommonPage {
 
     public static void endSession(){
         driver.quit();
-        driver.close();
     }
 
 }
