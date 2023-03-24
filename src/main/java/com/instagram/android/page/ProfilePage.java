@@ -38,8 +38,8 @@ public class ProfilePage extends CommonPage{
     private HashSet<String> tempUsersSet = new HashSet<>();
     private HashSet<String> usersToUnfollow = new HashSet<>();
 
-    private static FileWriter fileWriter = new FileWriter();
-    private static SearchPage searchPage = new SearchPage();
+    private static final FileWriter fileWriter = new FileWriter();
+    private static final SearchPage searchPage = new SearchPage();
 
     public void clickOnFollowingButton(){
         WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(60));
@@ -364,6 +364,8 @@ public class ProfilePage extends CommonPage{
 
 //            System.out.println("Web elements array size --->"+set.size());
         }
+
+        fileWriter.writeFollowers(this.getFollowersSet());
     }
 
     public void gatherFollowingUsers(){
@@ -463,11 +465,18 @@ public class ProfilePage extends CommonPage{
         }
 
     public HashSet<String> getUsersToUnfollow(){//Temp test
+
+        String names = "nidukilakshana8127,pratiksha0974,stefendemadu,tharusha_chanu,mihiri_nishadika,pathumsinghr,sainiladla5951,_sumeesha.99_";
+        String[] namesArray = names.split(",");
         HashSet<String> tempTest = new HashSet<>();
-        tempTest.add("piyumi__wathsala__");
-        tempTest.add("supuni_witharanage_");
-        tempTest.add("bhaagi_99");
-        tempTest.add("nex_thmini");
+//        tempTest.add("piyumi__wathsala__");
+//        tempTest.add("supuni_witharanage_");
+//        tempTest.add("bhaagi_99");
+//        tempTest.add("nex_thmini");
+//        tempTest.add(Arrays.asList(names.split(",")))
+
+        tempTest.addAll(Arrays.asList(namesArray));
+
         return tempTest;
     }
 
