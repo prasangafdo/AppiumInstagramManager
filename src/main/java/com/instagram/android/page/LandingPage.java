@@ -11,13 +11,13 @@ public class LandingPage extends CommonPage {
     private final By btnSearch = By.id("com.instagram.android:id/search_tab");
 
     public void clickOnProfileButton(){
-        WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(30));
+        WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(15));
         wait.until(ExpectedConditions.elementToBeClickable(btnProfile)).click();
 //        driver.findElement(btnProfile).click();
     }
 
     public void clickOnSearchButton(){
-        WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(30));
+        WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(15));
         wait.until(ExpectedConditions.elementToBeClickable(btnSearch)).click();
 //        driver.findElement(btnProfile).click();
     }
