@@ -15,16 +15,23 @@ public class SearchModule {
 //
 //    }
 
-    public static void searchByUsername() throws InterruptedException {
+    public static void searchByUsername() {
             for (String username:profile.getUsersToUnfollow()) {
                 search.searchByUsername(username);
                 search.selectAccountsFromTabs();
                 search.selectFirstRecordFromSearchResults();
                 if (otherProfile.isUsernameTopicDisplaying()){
-                    otherProfile.clickOnFollowingButton();
-                    otherProfile.clickOnUnfollowButton();
-                    otherProfile.clickOnUnfollowFromPopup();//Unfollow completed. Add a step to navigate back to search
-                    landing.clickOnSearchButton();
+                    try{
+                        otherProfile.clickOnFollowingButton();
+                        otherProfile.clickOnUnfollowButton();
+                        otherProfile.clickOnUnfollowFromPopup();//Unfollow completed. Add a step to navigate back to search
+                        landing.clickOnSearchButton();
+                    }
+                    catch (Exception e){
+                        e.printStackTrace();
+                        landing.clickOnSearchButton();
+                    }
+
                 }
             }
             //Create a new method in profile page for unfollowing process and call the method here
