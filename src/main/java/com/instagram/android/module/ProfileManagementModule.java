@@ -2,14 +2,15 @@ package com.instagram.android.module;
 
 import com.instagram.android.page.LandingPage;
 import com.instagram.android.page.ProfilePage;
+import com.instagram.android.util.FileWriter;
 
-import java.io.FileWriter;
 import java.io.IOException;
 import java.util.HashSet;
 
 public class ProfileManagementModule {
     private static final LandingPage landing = new LandingPage();
     private static final ProfilePage profile = new ProfilePage();
+    private static com.instagram.android.util.FileWriter fileWriter = new FileWriter(); //for testing only
 
     public static void navigateToProfile(){
         landing.clickOnProfileButton();
@@ -42,16 +43,17 @@ public class ProfileManagementModule {
     }
     public static void gatherFollowers(){
         profile.gatherFollowers();
-        System.out.println("Followers: "+profile.getFollowersSet().size()+profile.getFollowersSet().toString());
-        try {
-            FileWriter myWriter = new FileWriter("followers.txt");
-            myWriter.write("Followers: "+profile.getFollowersSet().size()+profile.getFollowersSet().toString());
-            myWriter.close();
-            System.out.println("Successfully wrote to the file.");
-        } catch (IOException e) {
-            System.out.println("An error occurred.");
-            e.printStackTrace();
-        }
+        fileWriter.writeUsersIFollow(profile.getFollowingUsersSet());
+//        System.out.println("Followers: "+profile.getFollowersSet().size()+profile.getFollowersSet().toString());
+//        try {
+//            FileWriter myWriter = new FileWriter("followers.txt");
+//            myWriter.write("Followers: "+profile.getFollowersSet().size()+profile.getFollowersSet().toString());
+//            myWriter.close();
+//            System.out.println("Successfully wrote to the file.");
+//        } catch (IOException e) {
+//            System.out.println("An error occurred.");
+//            e.printStackTrace();
+//        }
     }
     public static void gatherFollowingUsers(){
         profile.gatherFollowingUsers();
