@@ -18,7 +18,9 @@ private final By lblUserNames = By.xpath("//android.widget.LinearLayout[contains
     public void searchByUsername(String username){
         WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(10));
         wait.until(ExpectedConditions.elementToBeClickable(txtSearchBar)).click();
+        wait.until(ExpectedConditions.visibilityOfElementLocated(txtSearchBar)).click();
         wait.until(ExpectedConditions.elementToBeClickable(txtSearchBar)).sendKeys(username);
+        System.out.println("Unfollowing: ".concat(username));
         driver.executeScript("mobile:performEditorAction", ImmutableMap.of("action", "done")); //This is used to click the return key
     }
 

@@ -38,12 +38,15 @@ public class OtherUserProfilePage extends CommonPage{
         WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(30));
         wait.until(ExpectedConditions.elementToBeClickable(btnUnfollow)).click();
     }
-    public void clickOnUnfollowFromPopup() throws InterruptedException {
+    public void clickOnUnfollowFromPopup() throws InterruptedException {//Add a verification here ******************
         Thread.sleep(2000);
         WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(30));
 //        wait.until(ExpectedConditions.elementToBeClickable(btnUnfollowPopup)).click();
-        if (driver.findElements(btnUnfollowPopup).size()>0){
+        try {
             wait.until(ExpectedConditions.elementToBeClickable(btnUnfollowPopup)).click();
+        }
+        catch (Exception e){
+            e.printStackTrace();
         }
     }
 

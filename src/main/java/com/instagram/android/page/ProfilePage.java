@@ -478,19 +478,19 @@ public class ProfilePage extends CommonPage{
 //        followingUsersSet.clear();
 //        followingUsersSet.addAll(Arrays.asList(namesArray));
 
-//        Scanner sc = null;
-//        try {
-//            sc = new Scanner(new File("./src/main/resources/followers.csv"));
-//        } catch (FileNotFoundException e) {
-//            e.printStackTrace();
-//        }
-//        sc.useDelimiter(",");
-//        while (sc.hasNext())
-//        {
-//            usersToUnfollow.add(sc.next());
-////            System.out.print(sc.next()+" ");  //find and returns the next complete token from this scanner
-//        }
-//        sc.close();  //closes the scanner
+        Scanner sc = null;
+        try {
+            sc = new Scanner(new File("./src/main/resources/usersToUnfollow.csv"));
+        } catch (FileNotFoundException e) {
+            e.printStackTrace();
+        }
+        sc.useDelimiter(",");
+        while (sc.hasNext())
+        {
+            usersToUnfollow.add(sc.next());
+//            System.out.print(sc.next()+" ");  //find and returns the next complete token from this scanner
+        }
+        sc.close();  //closes the scanner
 
         return usersToUnfollow;
     }

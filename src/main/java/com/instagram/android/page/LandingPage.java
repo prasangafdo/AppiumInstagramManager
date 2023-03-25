@@ -17,7 +17,7 @@ public class LandingPage extends CommonPage {
     }
 
     public void clickOnSearchButton(){
-        WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(15));
+        WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(30));
         wait.until(ExpectedConditions.elementToBeClickable(btnSearch)).click();
 //        driver.findElement(btnProfile).click();
     }

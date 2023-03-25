@@ -41,19 +41,19 @@ public class TestRunner {
     @Test
     public void unfollowUsersWhoDontFollowBack() {
         SoftAssert softAssert = new SoftAssert();
-        ProfileManagementModule.navigateToProfile();
-        ProfileManagementModule.navigateToFollowingList();
-        softAssert.assertTrue(ProfileManagementModule.isLeastInteractedLabelDisplaying());
-        ProfileManagementModule.scrollToTheEnd();
-        ProfileManagementModule.scrollToTheTop();
-        ProfileManagementModule.gatherFollowingUsers();
-        ProfileManagementModule.navigateToProfile();
-        ProfileManagementModule.navigateToFollowersList();
-        softAssert.assertTrue(ProfileManagementModule.isRemoveButtonDisplaying());
-        ProfileManagementModule.scrollToTheEndOfFollowingList();
-        ProfileManagementModule.scrollToTheTop();
-        ProfileManagementModule.gatherFollowers();
-        ProfileManagementModule.setUsersToUnfollow();
+//        ProfileManagementModule.navigateToProfile();
+//        ProfileManagementModule.navigateToFollowingList();
+//        softAssert.assertTrue(ProfileManagementModule.isLeastInteractedLabelDisplaying());
+//        ProfileManagementModule.scrollToTheEnd();
+//        ProfileManagementModule.scrollToTheTop();
+//        ProfileManagementModule.gatherFollowingUsers();
+//        ProfileManagementModule.navigateToProfile();
+//        ProfileManagementModule.navigateToFollowersList();
+//        softAssert.assertTrue(ProfileManagementModule.isRemoveButtonDisplaying());
+//        ProfileManagementModule.scrollToTheEndOfFollowingList();
+//        ProfileManagementModule.scrollToTheTop();
+//        ProfileManagementModule.gatherFollowers();
+//        ProfileManagementModule.setUsersToUnfollow();
         ProfileManagementModule.navigateToSearch();
         SearchModule.searchByUsernameAndUnfollow(); //this will do the unfollowing
         softAssert.assertAll();
