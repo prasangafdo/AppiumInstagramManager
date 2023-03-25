@@ -11,6 +11,8 @@ import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
 
+import java.io.File;
+import java.io.FileNotFoundException;
 import java.time.Duration;
 import java.util.*;
 
@@ -36,7 +38,8 @@ public class ProfilePage extends CommonPage{
     private HashSet<String> followingUsersSet = new HashSet<>();
     private HashSet<String> followersUsersSet = new HashSet<>();
     private HashSet<String> tempUsersSet = new HashSet<>();
-    private HashSet<String> usersToUnfollow = new HashSet<>();
+//    private HashSet<String> usersToUnfollow = new HashSet<>();
+    private List<String> usersToUnfollow = new ArrayList<>();
 
     private static final FileWriter fileWriter = new FileWriter();
     private static final SearchPage searchPage = new SearchPage();
@@ -460,26 +463,42 @@ public class ProfilePage extends CommonPage{
         System.out.println("Initial size: " + followingUsersSet.size());
         followingUsersSet.removeAll(followersUsersSet);
         System.out.println("After filtration: " + followingUsersSet.size());
-
         fileWriter.writeUsersToUnfollow(followingUsersSet);
+        usersToUnfollow.addAll(followingUsersSet);
         }
 
-    public HashSet<String> getUsersToUnfollow(){//Temp test
+    public List<String> getUsersToUnfollow(){//Temp test
 
-        String names = "nidukilakshana8127,pratiksha0974,stefendemadu,tharusha_chanu,mihiri_nishadika,pathumsinghr,sainiladla5951,_sumeesha.99_";
-        String[] namesArray = names.split(",");
-        HashSet<String> tempTest = new HashSet<>();
-//        tempTest.add("piyumi__wathsala__");
-//        tempTest.add("supuni_witharanage_");
-//        tempTest.add("bhaagi_99");
-//        tempTest.add("nex_thmini");
-//        tempTest.add(Arrays.asList(names.split(",")))
+//        String names = "dizza2k,pratiksha0974,stefendemadu,tharusha_chanu,mihiri_nishadika,pathumsinghr,sainiladla5951,_sumeesha.99_";
+//        String[] namesArray = names.split(",");
+//        HashSet<String> tempTest = new HashSet<>();
+//        tempTest.addAll(Arrays.asList(namesArray));
+////        return tempTest;
+//
+//        followingUsersSet.clear();
+//        followingUsersSet.addAll(Arrays.asList(namesArray));
 
-        tempTest.addAll(Arrays.asList(namesArray));
+//        Scanner sc = null;
+//        try {
+//            sc = new Scanner(new File("./src/main/resources/followers.csv"));
+//        } catch (FileNotFoundException e) {
+//            e.printStackTrace();
+//        }
+//        sc.useDelimiter(",");
+//        while (sc.hasNext())
+//        {
+//            usersToUnfollow.add(sc.next());
+////            System.out.print(sc.next()+" ");  //find and returns the next complete token from this scanner
+//        }
+//        sc.close();  //closes the scanner
 
-        return tempTest;
+        return usersToUnfollow;
     }
+}
 
-    }
+//        return followingUsersSet;
+//    }
+
+//    }
 
 

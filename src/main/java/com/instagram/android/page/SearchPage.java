@@ -25,7 +25,7 @@ private final By lblUserNames = By.xpath("//android.widget.LinearLayout[contains
 //            }
 //
 //        }
-        WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(8));
+        WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(10));
         wait.until(ExpectedConditions.elementToBeClickable(txtSearchBar)).click();
         wait.until(ExpectedConditions.elementToBeClickable(txtSearchBar)).sendKeys(username);
         driver.executeScript("mobile:performEditorAction", ImmutableMap.of("action", "done")); //This is used to click the return key

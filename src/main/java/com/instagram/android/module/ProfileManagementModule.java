@@ -8,8 +8,8 @@ import java.io.IOException;
 import java.util.HashSet;
 
 public class ProfileManagementModule {
-    private static final LandingPage landing = new LandingPage();
-    private static final ProfilePage profile = new ProfilePage();
+    protected static final LandingPage landing = new LandingPage();
+    protected static ProfilePage profile = new ProfilePage();
     private static com.instagram.android.util.FileWriter fileWriter = new FileWriter(); //for testing only
 
     public static void navigateToProfile(){
