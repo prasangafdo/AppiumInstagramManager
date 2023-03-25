@@ -16,15 +16,6 @@ private final By btnAccountsTab = By.xpath("//android.widget.FrameLayout[@conten
 private final By lblUserNames = By.xpath("//android.widget.LinearLayout[contains(@resource-id,'row_search_user_info_container')]");
 
     public void searchByUsername(String username){
-//        public void unfollowUsers(){
-//            followingUsersSet.add("nadeeshani_de_silva");
-//            for (String username:followingUsersSet) {
-//                searchPage.searchByUsername(username);
-//                searchPage.selectAccountsFromTabs();
-//                searchPage.selectFirstRecordFromSearchResults();
-//            }
-//
-//        }
         WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(10));
         wait.until(ExpectedConditions.elementToBeClickable(txtSearchBar)).click();
         wait.until(ExpectedConditions.elementToBeClickable(txtSearchBar)).sendKeys(username);
