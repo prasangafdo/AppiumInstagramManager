@@ -1,5 +1,6 @@
 package com.instagram.android.page;
 
+import com.instagram.android.util.FileWriter;
 import org.openqa.selenium.By;
 import org.openqa.selenium.Point;
 import org.openqa.selenium.WebElement;
@@ -9,6 +10,9 @@ import org.openqa.selenium.interactions.Sequence;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
+
+import java.io.File;
+import java.io.FileNotFoundException;
 import java.time.Duration;
 import java.util.*;
 
@@ -34,9 +38,11 @@ public class ProfilePage extends CommonPage{
     private HashSet<String> followingUsersSet = new HashSet<>();
     private HashSet<String> followersUsersSet = new HashSet<>();
     private HashSet<String> tempUsersSet = new HashSet<>();
-    private HashSet<String> usersToUnfollow = new HashSet<>();
+//    private HashSet<String> usersToUnfollow = new HashSet<>();
+    private List<String> usersToUnfollow = new ArrayList<>();
 
-
+    private static final FileWriter fileWriter = new FileWriter();
+    private static final SearchPage searchPage = new SearchPage();
 
     public void clickOnFollowingButton(){
         WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(60));
@@ -48,7 +54,6 @@ public class ProfilePage extends CommonPage{
         wait.until(ExpectedConditions.elementToBeClickable(btnFollowers)).click();
     }
 
-
     public boolean isLeastInteractedLabelDisplaying(){
         WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(60));
         return wait.until(ExpectedConditions.elementToBeClickable(lblLeastInteracted)).isDisplayed();
@@ -58,27 +63,6 @@ public class ProfilePage extends CommonPage{
         WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(60));
         return wait.until(ExpectedConditions.elementToBeClickable(btnFirstRemove)).isDisplayed();
     }
-
-    public void scrollTillLoadMoreButtonDisplays() {
-//        WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(60));
-        //initiateTheScrolling();
-        while (isScreenScrollable) {
-            continueScrolling();
-        }
-//        try {
-//            Thread.sleep(1000);
-//            while (isScreenScrollable) {
-//                continueScrolling();
-//            }
-////            this.continueScrolling();
-//        }
-//        catch (Exception e){
-//            e.printStackTrace();
-//        }
-
-
-        }
-
 
     public void initiateTheScrolling(){
         if (!tempUsersSet.isEmpty()){
@@ -265,7 +249,7 @@ public class ProfilePage extends CommonPage{
         for (WebElement element: we){
             this.tempUsersSet.add (element.getText());
         }
-        System.out.println(tempUsersSet.size());
+//        System.out.println(tempUsersSet.size());
     }
 
     public void scrollToTheTop(){
@@ -383,6 +367,8 @@ public class ProfilePage extends CommonPage{
 
 //            System.out.println("Web elements array size --->"+set.size());
         }
+
+        fileWriter.writeFollowers(this.getFollowersSet());
     }
 
     public void gatherFollowingUsers(){
@@ -437,6 +423,8 @@ public class ProfilePage extends CommonPage{
 //            System.out.println("Web elements array size --->"+set.size());
         }
 
+        fileWriter.writeUsersIFollow(this.getFollowingUsersSet());
+
     }
 
     public void setFollowingUserList(){
@@ -471,14 +459,46 @@ public class ProfilePage extends CommonPage{
         return driver.findElement(lblSuggestionTopic).isDisplayed();
     }
 
-    public void setUsersToUnfollow(){
-        System.out.println("Initial size: "+followingUsersSet.size());
+    public void setUsersToUnfollow() {
+        System.out.println("Initial size: " + followingUsersSet.size());
         followingUsersSet.removeAll(followersUsersSet);
-        System.out.println("After filtration: "+followingUsersSet.size());
-//        System.out.println(followingUsersSet);
-        for(String str: followingUsersSet){
-            System.out.println(str.concat(" "));
+        System.out.println("After filtration: " + followingUsersSet.size());
+        fileWriter.writeUsersToUnfollow(followingUsersSet);
+        usersToUnfollow.addAll(followingUsersSet);
         }
-    }
 
+    public List<String> getUsersToUnfollow(){//Temp test
+
+//        String names = "dizza2k,pratiksha0974,stefendemadu,tharusha_chanu,mihiri_nishadika,pathumsinghr,sainiladla5951,_sumeesha.99_";
+//        String[] namesArray = names.split(",");
+//        HashSet<String> tempTest = new HashSet<>();
+//        tempTest.addAll(Arrays.asList(namesArray));
+////        return tempTest;
+//
+//        followingUsersSet.clear();
+//        followingUsersSet.addAll(Arrays.asList(namesArray));
+
+        Scanner sc = null;
+        try {
+            sc = new Scanner(new File("./src/main/resources/usersToUnfollow.csv"));
+        } catch (FileNotFoundException e) {
+            e.printStackTrace();
+        }
+        sc.useDelimiter(",");
+        while (sc.hasNext())
+        {
+            usersToUnfollow.add(sc.next());
+//            System.out.print(sc.next()+" ");  //find and returns the next complete token from this scanner
+        }
+        sc.close();  //closes the scanner
+
+        return usersToUnfollow;
+    }
 }
+
+//        return followingUsersSet;
+//    }
+
+//    }
+
+
