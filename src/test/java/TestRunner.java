@@ -75,6 +75,17 @@ public class TestRunner {
 //        }
 //    }
 
+
+    @Test
+    public void deleteMessagesOfTheUsersHaventRepliedYouButStillFollowsYou(){
+        //This will delete messages from the users who haven't replied you, but these users are still following you
+
+        //Navigate to messages
+        //Verify the user is on the correct screen
+
+
+    }
+
     @AfterTest
     public void tearDown(){
         CommonPage.endSession();//Add a common page module
