@@ -14,6 +14,12 @@ public class ChatModule {
         return message.isMessagesTopicDisplayingProperly(); //convert to boolean
     }
 
+    public static void deleteMessage(){
+        message.deleteMessage();
+    }
+
+
+//    deleteMessage();
 
 
 }
