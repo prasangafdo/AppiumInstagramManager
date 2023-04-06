@@ -1,6 +1,9 @@
 package com.instagram.android.module;
 
 import com.instagram.android.page.MessagesPage;
+import org.openqa.selenium.WebElement;
+
+import java.util.List;
 
 public class ChatModule {
 
@@ -11,12 +14,17 @@ public class ChatModule {
     }
 
     public static boolean isMessagesTopicDisplayingProperly(){
-        return message.isMessagesTopicDisplayingProperly(); //convert to boolean
+        return message.isMessagesTopicDisplayingProperly();
     }
 
-    public static void deleteMessage(){
-        message.deleteMessage();
+    public static void getUsernamesOfUnreadUsers(){ //For testing purpose
+         message.deleteMessage(message.getUsernamesOfUnreadUsers());
     }
+
+
+//    public static void deleteMessage(){
+//        message.deleteMessage();
+//    }
 
 
 //    deleteMessage();

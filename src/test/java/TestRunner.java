@@ -83,7 +83,7 @@ public class TestRunner {
         SoftAssert softAssert = new SoftAssert();
         ChatModule.navigateToMessages();
         softAssert.assertTrue(ChatModule.isMessagesTopicDisplayingProperly());
-        ChatModule.deleteMessage();
+        ChatModule.getUsernamesOfUnreadUsers(); //rename this later
         softAssert.assertAll();
 
         //Navigate to messages
