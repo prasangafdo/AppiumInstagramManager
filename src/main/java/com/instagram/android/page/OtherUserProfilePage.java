@@ -46,7 +46,7 @@ public class OtherUserProfilePage extends CommonPage{
             wait.until(ExpectedConditions.elementToBeClickable(btnUnfollowPopup)).click();
         }
         catch (Exception e){
-            e.printStackTrace();
+            System.out.println("Unfollowed a public account");
         }
     }
 

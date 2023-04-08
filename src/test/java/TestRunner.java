@@ -1,3 +1,4 @@
+import com.instagram.android.module.ChatModule;
 import com.instagram.android.module.ProfileManagementModule;
 import com.instagram.android.module.SearchModule;
 import com.instagram.android.page.CommonPage;
@@ -74,6 +75,22 @@ public class TestRunner {
 //            System.out.println(str);
 //        }
 //    }
+
+
+    @Test
+    public void deleteMessagesOfTheUsersHaventRepliedYouButStillFollowsYou(){
+        //This will delete messages from the users who haven't replied you, but these users are still following you
+        SoftAssert softAssert = new SoftAssert();
+        ChatModule.navigateToMessages();
+        softAssert.assertTrue(ChatModule.isMessagesTopicDisplayingProperly());
+        ChatModule.getUsernamesOfUnreadUsers(); //rename this later
+        softAssert.assertAll();
+
+        //Navigate to messages
+        //Verify the user is on the correct screen
+
+
+    }
 
     @AfterTest
     public void tearDown(){
