@@ -30,7 +30,7 @@ public class MessagesPage extends CommonPage{
 //        driver.findElement(btnProfile).click();
     }
 
-    public void deleteMessage(List<WebElement> chats){
+    public void deleteMessage(List<WebElement> chats) throws InterruptedException {
         WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(30));
         wait.until(ExpectedConditions.elementToBeClickable(btnChatThreadOfUnreadUsers));
 //        Actions actions = new Actions(driver);
@@ -43,8 +43,10 @@ public class MessagesPage extends CommonPage{
         Actions actions = new Actions(driver);
         actions.clickAndHold(str);
         actions.perform();
+            wait.until(ExpectedConditions.elementToBeClickable(btnDelete)).click();
+            wait.until(ExpectedConditions.elementToBeClickable(btnDeleteOnPopup)).click();
             driver.navigate().back();
-
+            Thread.sleep(2000);
         }
 
 

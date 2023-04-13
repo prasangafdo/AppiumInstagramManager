@@ -17,7 +17,7 @@ public class ChatModule {
         return message.isMessagesTopicDisplayingProperly();
     }
 
-    public static void getUsernamesOfUnreadUsers(){ //For testing purpose
+    public static void getUsernamesOfUnreadUsers() throws InterruptedException { //For testing purpose
          message.deleteMessage(message.getUsernamesOfUnreadUsers());
     }
 
