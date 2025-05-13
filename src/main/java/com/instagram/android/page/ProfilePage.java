@@ -22,14 +22,14 @@ import static java.util.Collections.singletonList;
 public class ProfilePage extends CommonPage{
 
     private final By btnFollowing = By.id("com.instagram.android:id/profile_header_following_stacked_familiar");
-    private final By btnFollowers = By.id("com.instagram.android:id/row_profile_header_followers_container");
-    private final By lblLeastInteracted = By.xpath("//android.widget.LinearLayout[@content-desc='Least Interacted With']/android.widget.LinearLayout");
+    private final By btnFollowers = By.id("com.instagram.android:id/profile_header_followers_stacked_familiar");
+    private final By lblSortBy= By.id("com.instagram.android:id/sorting_entry_row_option");
     private final By btnSeeAllSuggestions = By.id("com.instagram.android:id/see_all_button");
     private final By btnLoadMore = By.id("com.instagram.android:id/row_load_more_button");
     private final By lblUsernameCard = By.xpath("(//android.widget.LinearLayout[@resource-id='com.instagram.android:id/follow_list_container'])[1]");
     private final By lblUsernames = By.xpath("//android.widget.TextView[@resource-id ='com.instagram.android:id/follow_list_username']");
     private final By lblSuggestionTopic = By.id("com.instagram.android:id/row_header_textview");
-    private final By btnFirstRemove = By.xpath("(//android.widget.TextView[@text='Remove'])[1]");
+    private final By btnMessageFirst = By.xpath("(//android.widget.Button[contains(@content-desc,'Message')])[1]");
     private final By btnRemove = By.xpath("//android.widget.TextView[not(@text='Follow')]/parent::android.widget.LinearLayout");
     private final By btnFollow = By.xpath("//android.widget.LinearLayout[@text]/parent::android.widget.LinearLayout/android.widget.TextView[@text='Follow']");
 
@@ -56,19 +56,19 @@ public class ProfilePage extends CommonPage{
 
     public boolean isLeastInteractedLabelDisplaying(){
         WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(60));
-        return wait.until(ExpectedConditions.elementToBeClickable(lblLeastInteracted)).isDisplayed();
+        return wait.until(ExpectedConditions.elementToBeClickable(lblSortBy)).isDisplayed();
     }
 
     public boolean isRemoveButtonDisplaying(){
         WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(60));
-        return wait.until(ExpectedConditions.elementToBeClickable(btnFirstRemove)).isDisplayed();
+        return wait.until(ExpectedConditions.elementToBeClickable(btnMessageFirst)).isDisplayed();
     }
 
     public void initiateTheScrolling(){
         if (!tempUsersSet.isEmpty()){
             tempUsersSet.clear();
         }
-        Point source = driver.findElement(lblLeastInteracted).getLocation();
+        Point source = driver.findElement(lblSortBy).getLocation();
         PointerInput finger = new PointerInput(PointerInput.Kind.TOUCH, "finger");
         Sequence sequence = new Sequence(finger, 1);
         sequence.addAction(finger.createPointerMove(ofMillis(0),
@@ -180,7 +180,7 @@ public class ProfilePage extends CommonPage{
         if (!tempUsersSet.isEmpty()){
             tempUsersSet.clear();
         }
-        Point source = driver.findElement(btnFirstRemove).getLocation();
+        Point source = driver.findElement(btnMessageFirst).getLocation();
         PointerInput finger = new PointerInput(PointerInput.Kind.TOUCH, "finger");
         Sequence sequence = new Sequence(finger, 1);
         sequence.addAction(finger.createPointerMove(ofMillis(0),
@@ -259,11 +259,16 @@ public class ProfilePage extends CommonPage{
         isScreenScrollable = true;
 
         while (isScreenScrollable) {
-            WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(6));
-            if (driver.findElements(btnFollow).size()==0){
-                wait.until(ExpectedConditions.visibilityOfElementLocated(lblUsernameCard));
+            try {
+                WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(6));
+                if (driver.findElements(btnFollow).isEmpty()) {
+                    wait.until(ExpectedConditions.visibilityOfElementLocated(lblUsernameCard));
+                }
+            } catch (Exception e) {
+                isScreenScrollable = false;
+                System.out.println("Exception occurred while waiting for elements: " + e.getMessage());
             }
-            else isScreenScrollable = false;
+
 
             Point source;
             PointerInput finger;
@@ -297,7 +302,7 @@ public class ProfilePage extends CommonPage{
 
             isScreenScrollable = true;
 
-            if (driver.findElements(lblLeastInteracted).size()>0) {
+            if (driver.findElements(lblSortBy).size()>0) {
                 isScreenScrollable = false; //User has reached the end of the scrollable content
                 System.out.println("User reached the top of the scrollable content");
             }
@@ -372,7 +377,7 @@ public class ProfilePage extends CommonPage{
     }
 
     public void gatherFollowingUsers(){
-        Point source = driver.findElement(lblLeastInteracted).getLocation();
+        Point source = driver.findElement(lblSortBy).getLocation();
         PointerInput finger = new PointerInput(PointerInput.Kind.TOUCH, "finger");
         Sequence sequence = new Sequence(finger, 1);
         sequence.addAction(finger.createPointerMove(ofMillis(0),
