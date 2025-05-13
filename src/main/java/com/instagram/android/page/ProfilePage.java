@@ -21,7 +21,7 @@ import static java.util.Collections.singletonList;
 
 public class ProfilePage extends CommonPage{
 
-    private final By btnFollowing = By.id("com.instagram.android:id/row_profile_header_following_container");
+    private final By btnFollowing = By.id("com.instagram.android:id/profile_header_following_stacked_familiar");
     private final By btnFollowers = By.id("com.instagram.android:id/row_profile_header_followers_container");
     private final By lblLeastInteracted = By.xpath("//android.widget.LinearLayout[@content-desc='Least Interacted With']/android.widget.LinearLayout");
     private final By btnSeeAllSuggestions = By.id("com.instagram.android:id/see_all_button");
@@ -140,7 +140,7 @@ public class ProfilePage extends CommonPage{
                     PointerInput.Origin.viewport(), source.x, source.y));
             sequence.addAction(finger.createPointerDown(PointerInput.MouseButton.MIDDLE.asArg()));
             sequence.addAction(new Pause(finger, ofMillis(100)));
-            sequence.addAction(finger.createPointerMove(ofMillis(600),
+            sequence.addAction(finger.createPointerMove(ofMillis(1600),
                     PointerInput.Origin.viewport(), source.x, source.y -  99900));
             sequence.addAction(finger.createPointerUp(PointerInput.MouseButton.MIDDLE.asArg()));
 

@@ -20,11 +20,11 @@ public class SearchModule extends ProfileManagementModule{
                         otherProfile.clickOnFollowingButton();
                         otherProfile.clickOnUnfollowButton();
                         otherProfile.clickOnUnfollowFromPopup();
-                        landing.clickOnSearchButton();
+                        otherProfile.clickOnBackButton();
                     }
                     catch (Exception e){
-                        e.printStackTrace();
-                        landing.clickOnSearchButton();
+                        System.out.println("You've already unfollowed this user manually");
+                        otherProfile.clickOnBackButton();
                     }
                 }
             }

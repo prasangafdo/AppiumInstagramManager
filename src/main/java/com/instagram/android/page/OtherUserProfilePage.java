@@ -13,6 +13,7 @@ public class OtherUserProfilePage extends CommonPage{
     private final By btnFollowing = By.xpath("//android.widget.TextView[contains(@resource-id,'follow_button') and (@text='Following')]");
     private final By btnUnfollow = By.id("com.instagram.android:id/follow_sheet_unfollow_row");
     private final By btnUnfollowPopup = By.id("com.instagram.android:id/primary_button");
+    private final By btnBack = By.id("com.instagram.android:id/action_bar_button_back");
 
     /****
      * add a verification point - this is an enhancement
@@ -20,12 +21,12 @@ public class OtherUserProfilePage extends CommonPage{
 
     public boolean isUsernameTopicDisplaying(){
         WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(30));
-        return wait.until(ExpectedConditions.elementToBeClickable(lblUsernameTopic)).isDisplayed();
+        return wait.until(ExpectedConditions.visibilityOfElementLocated(lblUsernameTopic)).isDisplayed();
     }
 
     public void clickOnFollowingButton(){
         try {
-            WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(5));
+            WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(3));
             wait.until(ExpectedConditions.elementToBeClickable(btnFollowing)).click();
         }
         catch (Exception e){
@@ -35,12 +36,19 @@ public class OtherUserProfilePage extends CommonPage{
 
     }
     public void clickOnUnfollowButton(){
-        WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(30));
+        WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(2)); //Change this to 30 later
         wait.until(ExpectedConditions.elementToBeClickable(btnUnfollow)).click();
     }
+
+    public void clickOnBackButton(){
+        WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(10));
+        wait.until(ExpectedConditions.elementToBeClickable(btnBack)).click();
+    }
+
+
     public void clickOnUnfollowFromPopup() throws InterruptedException {//Add a verification here ******************
-        Thread.sleep(2000);
-        WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(30));
+//        Thread.sleep(2000);
+        WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(5));
 //        wait.until(ExpectedConditions.elementToBeClickable(btnUnfollowPopup)).click();
         try {
             wait.until(ExpectedConditions.elementToBeClickable(btnUnfollowPopup)).click();
